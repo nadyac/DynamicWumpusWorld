@@ -1,10 +1,10 @@
 int x;
 int y;
 
-
 int numberOfRectangles = 8;
 
 Player player;
+Wumpus wumpus;
 Board board;
 
 int boardSize = 600;
@@ -15,6 +15,7 @@ void setup(){
   board = new Board();
   size(boardSize, boardSize);
   player = new Player(0, 7);
+  wumpus = new Wumpus();
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
   board.setPits();
@@ -37,6 +38,7 @@ void draw(){
     }
   } 
   player.display();
+  wumpus.display();
 }
 /*move if the player pressed a key */
 void keyPressed(){
