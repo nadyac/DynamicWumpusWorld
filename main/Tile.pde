@@ -34,16 +34,20 @@ class Tile{
   }
   
   void updateXY(int x1, int y1){
-    x = x1;
-    y = y1;
+    xCoordinate = x1;
+    yCoordinate = y1;
     
+  }
+  
+  boolean getPit() {
+    return hasPit;  
   }
   
   void display(){
     if(hasPit == true){
       fill(0);
       ellipseMode(CENTER);
-      ellipse(x, y, 50, 50);
+      ellipse(xCoordinate, yCoordinate, 50, 50);
     }
   }
   

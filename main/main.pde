@@ -18,12 +18,34 @@ void setup(){
     for(int j = 0; j < 8; j++){
       board[i][j] = new Tile();
         Tile tile = board[i][j];
-        tile.updatePit(true);
+        tile.setPit(false);
         tile.updateXY(i*rectSize+rectSize/2,j*rectSize+rectSize/2);
     }
   }
+  for (int i = 0; i < 10; i++) {
+        int pit1;
+        int pit2;
+        do {
+          float x = random(0, 7);
+          float y = random(0, 7);
+          pit1 = int(x);
+          pit2 = int(y);
+        } while(board[pit1][pit2].getPit() == true);
+        board[pit1][pit2].setPit(true);
+  }
   smooth();
+  int count = 0;
+  for(int i = 0; i < 8; i++){
+    for(int j = 0; j < 8; j++){
+        if (board[i][j].getPit() == true) {
+          count++;
+        }
+    }
+  }
+  print(count);
 }
+
+
 
 void draw(){
   for (x = 0; x < numberOfRectangles; x++){
