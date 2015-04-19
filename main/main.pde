@@ -66,10 +66,10 @@ void draw(){
       stroke(0);
       rect(x*rectSize, y*rectSize, rectSize, rectSize);
       
-      if(x%2 == 0 && y%2 == 0){
+     // if(x%2 == 0 && y%2 == 0){
          Tile tile = board[x][y];
          tile.display();
-      }
+      //}
     }
   }
   player.display();
