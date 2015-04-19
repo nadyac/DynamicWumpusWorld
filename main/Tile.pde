@@ -21,16 +21,16 @@ class Tile{
     hasPit = set;
   }
   
-  void setStench(){
-    
+  void setStench(boolean set){
+    hasStench = set;
   }
   
-  void setWumpus(){
-    
+  void setWumpus(boolean set){
+    hasWumpus = set;
   }
   
-  void setPlayer(){
-    
+  void setPlayer(boolean set){
+    hasPlayer = set;
   }
   
   void updateXY(int x1, int y1){
