@@ -36,13 +36,13 @@ void setup(){
            board[pit1][pit2+1].setBreeze(true); 
         }
         if (pit2 > 0) {
-          board[pit1][pit2-1].setPit(true);
+          board[pit1][pit2-1].setBreeze(true);
         }
         if (pit1 < 7) {
-           board[pit1+1][pit2].setPit(true); 
+           board[pit1+1][pit2].setBreeze(true); 
         }
         if (pit1 > 0) {
-           board[pit1-1][pit2].setPit(true); 
+           board[pit1-1][pit2].setBreeze(true); 
         }
   }
   smooth();
