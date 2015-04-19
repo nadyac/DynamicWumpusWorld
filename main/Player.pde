@@ -43,6 +43,7 @@ class Player{
     if (keyCode == UP && yGUI != 0 && yCoordinate!=0) {
       yGUI = yGUI - speed;
        yCoordinate = yCoordinate-1;
+       
      } 
     else if (keyCode == DOWN && yGUI!=600 && yCoordinate!=7) {
       yGUI = yGUI + speed;
