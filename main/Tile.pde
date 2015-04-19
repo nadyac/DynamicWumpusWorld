@@ -43,6 +43,10 @@ class Tile{
     return hasPit;  
   }
   
+  boolean getBreeze() {
+    return hasBreeze;  
+  }
+  
   void display(){
     if(hasPit == true){
       fill(0);

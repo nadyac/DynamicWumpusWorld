@@ -45,9 +45,17 @@ void keyPressed(){
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
   player.move();
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(true);
+  /** Getting the breeze*/
+  if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
+      print("There is a breeze..." + "\n");  
+  }
+  /** If there is no breeze, then "clear" the console */
+  else {
+    print("\n\n\n\n\n");  
+  }
   int x = player.getXCoordinate();
   int y = player.getYCoordinate();
   
-  print(x + ", " + y);  
+ // print(x + ", " + y);  
 }
 
