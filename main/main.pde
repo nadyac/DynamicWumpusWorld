@@ -32,6 +32,18 @@ void setup(){
           pit2 = int(y);
         } while(board[pit1][pit2].getPit() == true);
         board[pit1][pit2].setPit(true);
+        if (pit2 < 7) {
+           board[pit1][pit2+1].setBreeze(true); 
+        }
+        if (pit2 > 0) {
+          board[pit1][pit2-1].setPit(true);
+        }
+        if (pit1 < 7) {
+           board[pit1+1][pit2].setPit(true); 
+        }
+        if (pit1 > 0) {
+           board[pit1-1][pit2].setPit(true); 
+        }
   }
   smooth();
   int count = 0;

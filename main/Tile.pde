@@ -13,8 +13,8 @@ class Tile{
     
   }
   
-  void setBreeze(){
-    
+  void setBreeze(boolean setBreeze){
+      hasBreeze = setBreeze;
   }
   
   void setPit(boolean set){
