@@ -22,12 +22,13 @@ void setup(){
         tile.updateXY(i*rectSize+rectSize/2,j*rectSize+rectSize/2);
     }
   }
+  board[player.getXCoordinate()][player.getYCoordinate()].setPlayer(true);
   for (int i = 0; i < 10; i++) {
         int pit1;
         int pit2;
         do {
-          float x = random(0, 7);
-          float y = random(0, 7);
+          float x = random(0, 8);
+          float y = random(0, 8);
           pit1 = int(x);
           pit2 = int(y);
         } while(board[pit1][pit2].getPit() == true);
@@ -54,7 +55,7 @@ void setup(){
         }
     }
   }
-  print(count);
+  //print(count);
 }
 
 
@@ -66,7 +67,11 @@ void draw(){
       stroke(0);
       rect(x*rectSize, y*rectSize, rectSize, rectSize);
       
+<<<<<<< HEAD
+      //if(x%2 == 0 && y%2 == 0){
+=======
      // if(x%2 == 0 && y%2 == 0){
+>>>>>>> origin/master
          Tile tile = board[x][y];
          tile.display();
       //}
@@ -76,6 +81,10 @@ void draw(){
 }
 /*move if the player pressed a key */
 void keyPressed(){
- player.move();
+  player.move();
+  int x = player.getXCoordinate();
+  int y = player.getYCoordinate();
+  
+  print(x + ", " + y);  
 }
 
