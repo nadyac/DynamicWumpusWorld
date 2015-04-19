@@ -19,18 +19,38 @@ class Player{
     image(player, xGUI, yGUI, 75, 75);
   }
   
+  int getXCoordinate(){
+    return xCoordinate; 
+  }
+  
+  int getYCoordinate(){
+    return yCoordinate;
+  }
+  
+  void setXCoordinate(int x){
+    xCoordinate = x; 
+  }
+  
+  void setYCoordinate(int y){
+    yCoordinate = y; 
+  }
+  
   void move() {
-    if (keyCode == UP) {
-      yGUI = yGUI - speed; 
-    }
-    else if (keyCode == DOWN) {
+    if (keyCode == UP && yGUI != 0 && yCoordinate!=0) {
+      yGUI = yGUI - speed;
+       yCoordinate = yCoordinate-1;
+     } 
+    else if (keyCode == DOWN && yGUI!=600 && yCoordinate!=7) {
       yGUI = yGUI + speed;
+      yCoordinate = yCoordinate+1;
     }
-    else if (keyCode == RIGHT) {
+    else if (keyCode == RIGHT && xGUI!=600 && xCoordinate!=7) {
       xGUI = xGUI + speed;
+      xCoordinate = xCoordinate+1;
     }
-    else if (keyCode == LEFT) {
+    else if (keyCode == LEFT && xGUI!=0 && xCoordinate!=0) {
       xGUI = xGUI - speed;
+      xCoordinate = xCoordinate-1;
     }
     else {
       println("Please use the arrow keys to move. Press repeatedly for motion. o and p control speed.");
