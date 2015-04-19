@@ -74,7 +74,7 @@ void draw(){
   }
   player.display();
 }
-
+/*move if the player pressed a key */
 void keyPressed(){
  player.move();
 }
