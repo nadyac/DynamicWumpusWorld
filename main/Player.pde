@@ -40,7 +40,6 @@ class Player{
   }
   
   void move() {
-<<<<<<< HEAD
     if (keyCode == UP && yGUI != 0 && yCoordinate!=0) {
       yGUI = yGUI - speed;
        yCoordinate = yCoordinate-1;
@@ -60,23 +59,6 @@ class Player{
     else {
       println("Please use the arrow keys to move. Press repeatedly for motion. o and p control speed.");
     }       
-=======
-      if (keyCode == UP) {
-        yGUI = yGUI - speed; 
-      }
-      else if (keyCode == DOWN) {
-        yGUI = yGUI + speed;
-      }
-      else if (keyCode == RIGHT) {
-        xGUI = xGUI + speed;
-      }
-      else if (keyCode == LEFT) {
-        xGUI = xGUI - speed;
-      }
-      else {
-        println("Please use the arrow keys to move. Press repeatedly for motion. o and p control speed.");
-      }       
->>>>>>> origin/master
   }
   
 }

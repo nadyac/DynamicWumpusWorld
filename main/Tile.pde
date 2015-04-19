@@ -9,8 +9,8 @@ class Tile{
   boolean hasPlayer;
   boolean hasPit = false;
   
-  void setGold(){
-    
+  void setGold(boolean setGold){
+    hasGold = setGold;
   }
   
   void setBreeze(boolean setBreeze){
