@@ -1,5 +1,5 @@
 class Player{
-  PImage player = loadImage("wumpus.jpg");
+  PImage player = loadImage("archer1.png");
   int xCoordinate; 
   int yCoordinate;
   
