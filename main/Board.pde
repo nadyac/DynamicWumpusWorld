@@ -21,18 +21,21 @@ class Board{
      for (int i = 0; i < 10; i++) {
         int pit1;
         int pit2;
+        Tile tileToSet;
         do {
           float x = random(0, 8);
           float y = random(0, 8);
           pit1 = int(x);
           pit2 = int(y);
-        } while(board[pit1][pit2].getPit() == true);
-        board[pit1][pit2].setPit(true);
+          tileToSet = board[pit1][pit2];
+        //the ORs are to ensure the player and Wumpus do not spawn on top of pits
+        } while(tileToSet.getPit() == true || (pit1==0 && pit2==7) || tileToSet.getWumpus());
+        tileToSet.setPit(true);
         if (pit2 < 7) {
            board[pit1][pit2+1].setBreeze(true); 
         }
         if (pit2 > 0) {
-          board[pit1][pit2-1].setBreeze(true);
+           board[pit1][pit2-1].setBreeze(true);
         }
         if (pit1 < 7) {
            board[pit1+1][pit2].setBreeze(true); 

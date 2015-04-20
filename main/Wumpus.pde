@@ -15,6 +15,11 @@ class Wumpus{
      xCoordinate = startX();
      yCoordinate = startY(); 
      
+<<<<<<< HEAD
+=======
+     print("wumpus starts at " + xCoordinate + "," + yCoordinate + "\n");
+     
+>>>>>>> d01ea5cea9b41c5f0fa1de8e7a263e66fb4f040a
     /*Set the wumpus's coordinates in pixels*/
      xGUI = xCoordinate*75;
      yGUI = yCoordinate*75; 
@@ -37,11 +42,11 @@ class Wumpus{
       return yCoord;
   }
   
-  int getXposition(){
+  int getXCoordinate(){
      return xCoordinate; 
   }
   
-  int getYposition(){
+  int getYCoordinate(){
     return yCoordinate;
   }
   

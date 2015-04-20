@@ -3,7 +3,7 @@ class Player{
   int xCoordinate; 
   int yCoordinate;
   
- /*xGUI: player's x coord in pixels
+ /* xGUI: player's x coord in pixels
     yGUI: player's y coord in pixels */
   int xGUI; 
   int yGUI;
@@ -41,21 +41,21 @@ class Player{
   
   void move() {
     if (keyCode == UP && yGUI != 0 && yCoordinate!=0) {
-      yGUI = yGUI - speed;
+       yGUI = yGUI - speed;
        yCoordinate = yCoordinate-1;
        
      } 
     else if (keyCode == DOWN && yGUI!=600 && yCoordinate!=7) {
-      yGUI = yGUI + speed;
-      yCoordinate = yCoordinate+1;
+       yGUI = yGUI + speed;
+       yCoordinate = yCoordinate+1;
     }
     else if (keyCode == RIGHT && xGUI!=600 && xCoordinate!=7) {
-      xGUI = xGUI + speed;
-      xCoordinate = xCoordinate+1;
+       xGUI = xGUI + speed;
+       xCoordinate = xCoordinate+1;
     }
     else if (keyCode == LEFT && xGUI!=0 && xCoordinate!=0) {
-      xGUI = xGUI - speed;
-      xCoordinate = xCoordinate-1;
+       xGUI = xGUI - speed;
+       xCoordinate = xCoordinate-1;
     }
     else {
       println("Please use the arrow keys to move. Press repeatedly for motion. o and p control speed.");
