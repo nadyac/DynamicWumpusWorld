@@ -15,14 +15,15 @@ void setup(){
   board = new Board();
   board.setPits();
   size(boardSize, boardSize);
+  
   player = new Player(0, 7);
+  
   wumpus = new Wumpus();
-<<<<<<< HEAD
   wumpus.getPossibleMoves();
+  
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
-  board.setPits();
-=======
+  board.setPits(); //why is this on here again?
   Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   playerTile.setPlayer(true);
   int x = wumpus.getXCoordinate();
@@ -70,12 +71,7 @@ void draw(){
   wumpus.display();
 }
 
-<<<<<<< HEAD
-/*move if the player pressed a key */
-=======
-
 /*move if the player pressed a key. this is when the board updates. */
->>>>>>> d01ea5cea9b41c5f0fa1de8e7a263e66fb4f040a
 void keyPressed(){
   /** Unsets the player's position from the old tile */
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
