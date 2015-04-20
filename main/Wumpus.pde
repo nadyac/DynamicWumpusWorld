@@ -36,11 +36,11 @@ class Wumpus{
       return yCoord;
   }
   
-  int getXposition(){
+  int getXCoordinate(){
      return xCoordinate; 
   }
   
-  int getYposition(){
+  int getYCoordinate(){
     return yCoordinate;
   }
   

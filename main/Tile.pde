@@ -47,6 +47,14 @@ class Tile{
     return hasBreeze;  
   }
   
+  boolean getWumpus() {
+    return hasWumpus; 
+  }
+  
+  boolean getStench() {
+    return hasStench; 
+  }
+  
   void display(){
     if(hasPit == true){
       fill(0);

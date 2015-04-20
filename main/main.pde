@@ -13,12 +13,35 @@ int rectSize = boardSize/8;
 
 void setup(){
   board = new Board();
+  board.setPits();
   size(boardSize, boardSize);
   player = new Player(0, 7);
   wumpus = new Wumpus();
-  Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
-  tile.setPlayer(true);
-  board.setPits();
+  Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
+  playerTile.setPlayer(true);
+  int x = wumpus.getXCoordinate();
+  int y = wumpus.getYCoordinate();
+  Tile wumpusTile = board.getTile(x, y);
+  wumpusTile.setWumpus(true);
+  /** Setting all the tiles around the wumpus that have stench - this probably should be done in board, but wumpus is initiated here, so I kept it as is.
+    * Feel free to change as you see fit!
+    */
+   if (y < 7) {
+      Tile wt1 = board.getTile(x, y+1);
+      wt1.setStench(true); 
+   }
+   if (y > 0) {
+      Tile wt2 = board.getTile(x, y-1);
+      wt2.setStench(true);
+   }
+   if (x < 7) {
+      Tile wt3 = board.getTile(x+1, y);
+      wt3.setStench(true);
+   }
+   if (x > 0) {
+      Tile wt4 = board.getTile(x-1, y);
+      wt4.setStench(true);
+   }
   smooth();
 }
 
@@ -42,20 +65,28 @@ void draw(){
 }
 /*move if the player pressed a key */
 void keyPressed(){
+  /** Unsets the player's position from the old tile */
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
+  /** Player makes their new move */
   player.move();
+  /** Sets the tile for the player's new position */
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(true);
-  /** Getting the breeze*/
-  if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
+  
+  /** If there is a tile near a pit and the wumpus */
+   if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true && board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
+      print("There is a stenchy breeze...");  
+   }
+   /** If there is a tile only near a pit */
+   else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
       print("There is a breeze..." + "\n");  
+   }
+   /** If there is a tile only near the wumpus */
+   else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true) {
+      print("There is a stench..." + "\n");  
   }
-  /** If there is no breeze, then "clear" the console */
+  /** Otherwise, it is a safe tile and should "clear" the console */
   else {
     print("\n\n\n\n\n");  
   }
-  int x = player.getXCoordinate();
-  int y = player.getYCoordinate();
-  
- // print(x + ", " + y);  
 }
 
