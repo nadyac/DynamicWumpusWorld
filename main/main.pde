@@ -49,7 +49,6 @@ void setup(){
       Tile wt4 = board.getTile(x-1, y);
       wt4.setStench(true);
    }
->>>>>>> d01ea5cea9b41c5f0fa1de8e7a263e66fb4f040a
   smooth();
 }
 
