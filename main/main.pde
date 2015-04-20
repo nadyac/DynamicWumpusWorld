@@ -63,7 +63,7 @@ void draw(){
   player.display();
   wumpus.display();
 }
-/*move if the player pressed a key */
+/*move if the player pressed a key. this is when the board updates. */
 void keyPressed(){
   /** Unsets the player's position from the old tile */
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
@@ -74,15 +74,15 @@ void keyPressed(){
   
   /** If there is a tile near a pit and the wumpus */
    if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true && board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
-      print("There is a stenchy breeze...");  
+      print("There is a stenchy breeze...\n\n\n");  
    }
    /** If there is a tile only near a pit */
    else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
-      print("There is a breeze..." + "\n");  
+      print("There is a breeze..." + "\n\n\n");  
    }
    /** If there is a tile only near the wumpus */
    else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true) {
-      print("There is a stench..." + "\n");  
+      print("There is a stench..." + "\n\n\n");  
   }
   /** Otherwise, it is a safe tile and should "clear" the console */
   else {
