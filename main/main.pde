@@ -46,7 +46,6 @@ void setup(){
 }
 
 
-
 void draw(){
   for (x = 0; x < numberOfRectangles; x++){
     for (y = 0; y < numberOfRectangles; y++){
@@ -63,6 +62,8 @@ void draw(){
   player.display();
   wumpus.display();
 }
+
+
 /*move if the player pressed a key. this is when the board updates. */
 void keyPressed(){
   /** Unsets the player's position from the old tile */

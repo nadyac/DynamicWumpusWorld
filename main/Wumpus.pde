@@ -12,7 +12,7 @@ class Wumpus{
      xCoordinate = startX();
      yCoordinate = startY(); 
      
-     print("wumpus starts at " + xCoordinate + "," + yCoordinate);
+     print("wumpus starts at " + xCoordinate + "," + yCoordinate + "\n");
      
     /*Set the wumpus's coordinates in pixels*/
      xGUI = xCoordinate*75;
