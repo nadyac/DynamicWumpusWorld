@@ -16,6 +16,7 @@ void setup(){
   size(boardSize, boardSize);
   player = new Player(0, 7);
   wumpus = new Wumpus();
+  wumpus.getPossibleMoves();
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
   board.setPits();
@@ -40,6 +41,7 @@ void draw(){
   player.display();
   wumpus.display();
 }
+
 /*move if the player pressed a key */
 void keyPressed(){
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
