@@ -13,7 +13,6 @@ int rectSize = boardSize/8;
 
 void setup(){
   board = new Board();
-  board.setPits();
   size(boardSize, boardSize);
   
   player = new Player(0, 7);
@@ -23,7 +22,9 @@ void setup(){
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
-  board.setPits(); //why is this on here again?
+  
+  board.setPits();
+  
   Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   playerTile.setPlayer(true);
   int x = wumpus.getXCoordinate();
