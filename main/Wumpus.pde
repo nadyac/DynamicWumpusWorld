@@ -49,6 +49,8 @@ class Wumpus{
   ArrayList<int[]> getPossibleMoves(){
     ArrayList<int[]> possibleMoves = new ArrayList<int[]>();
       
+      
+      
       /**
       *Calculate all possible moves. Some moves will not 
       *be valid because they are off the grid (when the wumpus
@@ -110,6 +112,8 @@ class Wumpus{
    /*Call necessary functions to get wumpus to move*/
    void makeMove(Board b){
      
+     Tile tempTile = b.getTile(xCoordinate, yCoordinate);
+    // kb.addKnowledge(tempTile);
      float tmpSound = 0;
      float sound = 9;
      int[] bestMove = null;

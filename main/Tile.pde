@@ -55,6 +55,16 @@ class Tile{
     return hasStench; 
   }
   
+  int getXCoordinate() {
+    int i=(600+600/2)/xCoordinate;
+    return i-1;  
+  }
+  
+  int getYCoordinate() {
+     int i=(600+600/2)/yCoordinate;
+    return i-1;  
+  }
+  
   void display(){
     if(hasPit == true){
       fill(0);
