@@ -54,16 +54,16 @@ class Wumpus{
       *be valid because they are off the grid (when the wumpus
       *is at the edge of the world)
       */
-       int[] move0 = {xCoordinate-1,yCoordinate};
+       int[] move0 = {xCoordinate-1,yCoordinate}; //left
        possibleMoves.add(move0);
        
-       int[] move1 = {xCoordinate + 1,yCoordinate};
+       int[] move1 = {xCoordinate + 1,yCoordinate}; //right
        possibleMoves.add(move1);
        
-       int[] move2 = {xCoordinate,yCoordinate + 1};
+       int[] move2 = {xCoordinate,yCoordinate + 1}; //up
        possibleMoves.add(move2);
        
-       int[] move3 = {xCoordinate,yCoordinate - 1};
+       int[] move3 = {xCoordinate,yCoordinate - 1}; //down
        possibleMoves.add(move3);
        
        //print the possible moves (remove this later)
@@ -99,6 +99,7 @@ class Wumpus{
     return result;
   }
    
+   /*Call necessary functions to get wumpus to move*/
    void makeMove(Board b){
      
      float tmpSound = 0;
@@ -111,7 +112,7 @@ class Wumpus{
       
       for (int[] possibleMove: possibleMoves){
         tmpSound = calculateSound(possibleMove, playerLocation);
-    
+        print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straigtLine dist: " + tmpSound + " current sound: " + sound + "\n");
         if(tmpSound < sound || sound == 0){
           sound = tmpSound;
           bestMove = possibleMove; //current possible move is best so far 
@@ -119,7 +120,7 @@ class Wumpus{
         }
         
       }
-      print("********** " + bestMove[0] + "," + bestMove[1] + "\n");
+      print("best move: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
    }
   
@@ -131,27 +132,28 @@ class Wumpus{
     /*Move that Wumpus!*/
     void move(int[] bestMove) {
 
+      //move down 1 square
       if (yGUI != 0 && yCoordinate!=0) {
         yGUI = yGUI - speed;
-        print("**********" + yGUI);
         yCoordinate = bestMove[1];
          
        } 
+       //move up one square
       else if (yGUI!=600 && yCoordinate!=7) {
         yGUI = yGUI + speed;
-        print ("**********" + yGUI);
         yCoordinate = bestMove[1];
       }
+      //move to the right 1 square
       else if (xGUI!=600 && xCoordinate!=7) {
         xGUI = xGUI + speed;
-        print ("**********" + xGUI);
         xCoordinate = bestMove[0];
       }
+      //move to the left 1 square
       else if (xGUI!=0 && xCoordinate!=0) {
         xGUI = xGUI - speed;
-        print ("**********" + xGUI);
         xCoordinate = bestMove[0];
       }     
+          print("wumpus location: " + xCoordinate + "," + yCoordinate + "\n");
     }
 }
   
