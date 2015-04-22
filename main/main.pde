@@ -6,6 +6,7 @@ int numberOfRectangles = 8;
 Player player;
 Wumpus wumpus;
 Board board;
+Timer timer = new Timer(2000);
 
 int boardSize = 600;
 int rectSize = boardSize/8;
@@ -14,6 +15,7 @@ int rectSize = boardSize/8;
 void setup(){
   board = new Board();
   size(boardSize, boardSize);
+  timer.start();
   
   player = new Player(0, 7);
   
@@ -69,6 +71,10 @@ void draw(){
   } 
   player.display();
   wumpus.display();
+    if(timer.finish()){
+    wumpus.makeMove(board);
+    timer.start();
+  }
 }
 
 /*move if the player pressed a key. this is when the board updates. */
@@ -98,5 +104,7 @@ void keyPressed(){
   }
   
   /*wumpus recalculates the player's location*/
-  wumpus.makeMove(board);
+    
+
+
 }
