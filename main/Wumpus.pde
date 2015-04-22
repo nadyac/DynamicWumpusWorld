@@ -139,17 +139,17 @@ class Wumpus{
          
        } 
        //move up one square
-      else if (yGUI!=600 && yCoordinate!=7) {
+      if (yGUI!=600 && yCoordinate!=7) {
         yGUI = bestMove[1]*75;
         yCoordinate = bestMove[1];
       }
       //move to the right 1 square
-      else if (xGUI!=600 && xCoordinate!=7) {
+      if (xGUI!=600 && xCoordinate!=7) {
         xGUI = bestMove[0]*75;
         xCoordinate = bestMove[0];
       }
       //move to the left 1 square
-      else if (xGUI!=0 && xCoordinate!=0) {
+      if (xGUI!=0 && xCoordinate!=0) {
         xGUI =  bestMove[0]*75;
         xCoordinate = bestMove[0];
       }     
