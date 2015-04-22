@@ -111,7 +111,7 @@ class Wumpus{
    void makeMove(Board b){
      
      float tmpSound = 0;
-     float sound = 7;
+     float sound = 9;
      int[] bestMove = null;
      boolean shouldMove = true;
      
@@ -122,6 +122,7 @@ class Wumpus{
       //loop through each possible move and evaluate them
       for (int[] possibleMove: possibleMoves){
         tmpSound = calculateSound(possibleMove, playerLocation);
+        print("Tmp: " + tmpSound + " S: " + sound + "\n");
         print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straigtLine dist: " + tmpSound + " current sound: " + sound + "\n");
         if(tmpSound < sound){
           sound = tmpSound;
