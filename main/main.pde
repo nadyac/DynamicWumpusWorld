@@ -96,5 +96,7 @@ void keyPressed(){
   else {
     print("\n\n\n\n\n");  
   }
+  
+  /*wumpus recalculates the player's location*/
+  wumpus.getPlayerLocation(board);
 }
-
