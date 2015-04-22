@@ -98,5 +98,5 @@ void keyPressed(){
   }
   
   /*wumpus recalculates the player's location*/
-  wumpus.getPlayerLocation(board);
+  wumpus.makeMove(board);
 }

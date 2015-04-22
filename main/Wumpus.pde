@@ -46,7 +46,7 @@ class Wumpus{
   }
   
   /*Get all possible moves */
-  void getPossibleMoves(){
+  ArrayList<int[]> getPossibleMoves(){
     ArrayList<int[]> possibleMoves = new ArrayList<int[]>();
       
       /**
@@ -71,11 +71,14 @@ class Wumpus{
        for(int[] moves: possibleMoves){
          print(moves[0]+ "," + moves[1] + "\n");
        }
+       return possibleMoves;
   }
-  
+  /**
+  * getPlayerLocation - scan the board's tiles for the location of the player 
+  */
   int[] getPlayerLocation(Board b){
     
-     //get player's location by searching the board
+     /*get player's location by searching the board and store them in an array*/
     for (int i = 0; i < 8; i++){
        for(int j = 0; j < 8; j++){
          if (b.getTile(i,j).hasPlayer == true){
@@ -88,15 +91,36 @@ class Wumpus{
     return null;
   }
   
-  int calculateSound(int[] possibleMove, int[] playerLocation){
+  float calculateSound(int[] possibleMove, int[] playerLocation){
     
+    float result;
     //calculate straight line distance from player to given location
-    return 0;
+    result = sqrt(pow(playerLocation[0]-possibleMove[0], 2) + pow(playerLocation[1]-possibleMove[1], 2));
+    return result;
   }
-  
-  /* Calculate best move based on sound*/
-  void getBestMoveBySound(ArrayList<int[]> possibleMovesList){
+   
+   void makeMove(Board b){
+     
+     float tmpSound = 0;
+     float sound = 0;
+     int[] bestMove = null;
+     
+     //get the player's location 
+      int[] playerLocation = getPlayerLocation(b);
+      ArrayList<int[]> possibleMoves = getPossibleMoves();
+      
+      for (int[] possibleMove: possibleMoves){
+        tmpSound = calculateSound(possibleMove, playerLocation);
     
+        if(tmpSound < sound || sound == 0){
+          sound = tmpSound;
+          bestMove = possibleMove; //current possible move is best so far 
+          
+        }
+        
+      }
+      print("********** " + bestMove[0] + "," + bestMove[1] + "\n");
+      move(bestMove);
    }
   
     /*Display the Wumpus on the board*/  
@@ -105,23 +129,28 @@ class Wumpus{
     }
     
     /*Move that Wumpus!*/
-    void move() {
+    void move(int[] bestMove) {
+
       if (yGUI != 0 && yCoordinate!=0) {
         yGUI = yGUI - speed;
-        yCoordinate = yCoordinate-1;
+        print("**********" + yGUI);
+        yCoordinate = bestMove[1];
          
        } 
       else if (yGUI!=600 && yCoordinate!=7) {
         yGUI = yGUI + speed;
-        yCoordinate = yCoordinate+1;
+        print ("**********" + yGUI);
+        yCoordinate = bestMove[1];
       }
       else if (xGUI!=600 && xCoordinate!=7) {
         xGUI = xGUI + speed;
-        xCoordinate = xCoordinate+1;
+        print ("**********" + xGUI);
+        xCoordinate = bestMove[0];
       }
       else if (xGUI!=0 && xCoordinate!=0) {
         xGUI = xGUI - speed;
-        xCoordinate = xCoordinate-1;
+        print ("**********" + xGUI);
+        xCoordinate = bestMove[0];
       }     
     }
 }
