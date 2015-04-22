@@ -1,8 +1,11 @@
 class Tile{
+  PImage gold = loadImage("goldBar.png");
+  
   int xCoordinate;
   int yCoordinate;
   
   boolean hasGold;
+  boolean hasGlitter;
   boolean hasBreeze;
   boolean hasStench;
   boolean hasWumpus;
@@ -11,6 +14,10 @@ class Tile{
   
   void setGold(boolean setGold){
     hasGold = setGold;
+  }
+  
+  void setGlitter(boolean set){
+    hasGlitter = set;
   }
   
   void setBreeze(boolean setBreeze){
@@ -61,6 +68,10 @@ class Tile{
       ellipseMode(CENTER);
       ellipse(xCoordinate, yCoordinate, 50, 50);
     }
+    //the 25 was trial and error!
+    if(hasGold == true){
+      image(gold, xCoordinate-25, yCoordinate-25, 50, 50);
+    } 
   }
   
 }

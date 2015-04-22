@@ -26,6 +26,7 @@ void setup(){
   tile.setPlayer(true);
   
   board.setPits();
+  board.setGold();
   
   Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   playerTile.setPlayer(true);
