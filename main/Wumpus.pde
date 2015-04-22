@@ -54,18 +54,26 @@ class Wumpus{
       *be valid because they are off the grid (when the wumpus
       *is at the edge of the world)
       */
-       int[] move0 = {xCoordinate-1,yCoordinate}; //left
-       possibleMoves.add(move0);
-       
-       int[] move1 = {xCoordinate + 1,yCoordinate}; //right
-       possibleMoves.add(move1);
-       
-       int[] move2 = {xCoordinate,yCoordinate + 1}; //up
-       possibleMoves.add(move2);
-       
-       int[] move3 = {xCoordinate,yCoordinate - 1}; //down
-       possibleMoves.add(move3);
-       
+      if(xCoordinate != 0)
+      {
+         int[] move0 = {xCoordinate-1,yCoordinate}; //left
+         possibleMoves.add(move0);
+      }
+      if(xCoordinate != 7) 
+      {
+         int[] move1 = {xCoordinate + 1,yCoordinate}; //right
+         possibleMoves.add(move1);
+      }
+      if(yCoordinate != 7)
+      { 
+         int[] move2 = {xCoordinate,yCoordinate + 1}; //up
+         possibleMoves.add(move2);
+      }
+      if(yCoordinate != 0)
+      {
+         int[] move3 = {xCoordinate,yCoordinate - 1}; //down
+         possibleMoves.add(move3);
+      } 
        //print the possible moves (remove this later)
        print("possible wumpus moves: \n");
        for(int[] moves: possibleMoves){
