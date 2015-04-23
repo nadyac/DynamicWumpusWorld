@@ -1,6 +1,8 @@
 class Tile{
   int xCoordinate;
   int yCoordinate;
+  int xGUI;
+  int yGUI;
   
   boolean hasGold;
   boolean hasBreeze;
@@ -33,6 +35,14 @@ class Tile{
     hasPlayer = set;
   }
   
+  void setXGUI(int xgui) {
+    xGUI = xgui;
+  }
+  
+  void setYGUI (int ygui) {
+    yGUI = ygui;
+  }
+  
   void updateXY(int x1, int y1){
     xCoordinate = x1;
     yCoordinate = y1;
@@ -55,14 +65,20 @@ class Tile{
     return hasStench; 
   }
   
+  int getXGUI() {
+      return xGUI;
+  }
+  
+  int getYGUI() {
+     return yGUI; 
+  }
+  
   int getXCoordinate() {
-    int i=(600+600/2)/xCoordinate;
-    return i;  
+      return xCoordinate;
   }
   
   int getYCoordinate() {
-     int i=(600+600/2)/yCoordinate;
-    return i;  
+     return yCoordinate;
   }
   
   void display(){

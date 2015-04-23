@@ -1,4 +1,4 @@
-class Wumpus{
+class AvoidingWumpus{
   PImage wumpus = loadImage("wumpus.png");
   
   int xCoordinate;
@@ -10,7 +10,7 @@ class Wumpus{
   int speed = 75;
    
    /*Constructor*/
-   Wumpus(){
+   AvoidingWumpus(){
      /*Calculate starting coordinates*/
      xCoordinate = startX();
      yCoordinate = startY(); 
@@ -111,6 +111,8 @@ class Wumpus{
    
    /*Call necessary functions to get wumpus to move*/
    void makeMove(Board b){
+     Tile tempTile = b.getTile(xCoordinate, yCoordinate);
+     kb.addKnowledge(tempTile);
      float tmpSound = 0;
      float sound = 9;
      int[] bestMove = null;
@@ -128,6 +130,9 @@ class Wumpus{
         Tile tempTile2 = b.getTile(possibleMove[0], possibleMove[1]);  
         kb.addKnowledge(tempTile2);
         print("x1: " + possibleMove[0] + " y1: " + possibleMove[1] + "\n");
+        if (kb.getTile(possibleMove[0], possibleMove[1]).getPit() == true) {
+            tmpSound = tmpSound+1.5;    
+        }
         if(tmpSound < sound){
           sound = tmpSound;
           bestMove = possibleMove; //current possible move is best so far 
