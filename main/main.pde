@@ -18,10 +18,6 @@ void setup(){
   timer.start();
   
   player = new Player(0, 7);
-  
-  wumpus = new Wumpus();
-  wumpus.getPossibleMoves();
-  
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
   
@@ -29,6 +25,8 @@ void setup(){
   
   Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   playerTile.setPlayer(true);
+  wumpus = new Wumpus();
+  wumpus.getPossibleMoves();
   int x = wumpus.getXCoordinate();
   int y = wumpus.getYCoordinate();
   Tile wumpusTile = board.getTile(x, y);

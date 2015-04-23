@@ -20,7 +20,7 @@ class Wumpus{
      yGUI = yCoordinate*75; 
      
      /*Create empty knowledgebase*/
-     Knowledgebase kb = new Knowledgebase();
+     kb = new Knowledgebase();
   }
   
   /*Set x Coord for the Wumpus to start in*/
@@ -111,9 +111,8 @@ class Wumpus{
    
    /*Call necessary functions to get wumpus to move*/
    void makeMove(Board b){
-     
      Tile tempTile = b.getTile(xCoordinate, yCoordinate);
-    // kb.addKnowledge(tempTile);
+     //kb.addKnowledge(tempTile);
      float tmpSound = 0;
      float sound = 9;
      int[] bestMove = null;

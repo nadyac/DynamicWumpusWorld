@@ -12,11 +12,10 @@ class Knowledgebase{
   }
   
   public void addKnowledge (Tile tile) {
-    print("Bob");
-    //Tile tempTile = tile;
-    //int x =  tempTile.getXCoordinate();
-    //int y =  tempTile.getYCoordinate();
-    //KB[x][y] = tempTile; 
+    Tile tempTile = tile;
+    int x =  tempTile.getXCoordinate();
+    int y =  tempTile.getYCoordinate();
+    KB[x][y] = tempTile; 
   }
   
   public Tile getTile (int xCoordinate, int yCoordinate) {

@@ -57,12 +57,12 @@ class Tile{
   
   int getXCoordinate() {
     int i=(600+600/2)/xCoordinate;
-    return i-1;  
+    return i;  
   }
   
   int getYCoordinate() {
      int i=(600+600/2)/yCoordinate;
-    return i-1;  
+    return i;  
   }
   
   void display(){
