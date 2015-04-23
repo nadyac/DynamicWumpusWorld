@@ -17,7 +17,7 @@ class Timer{
     int timeNow = millis();
     int passed = timeNow - start;
     
-    System.out.println("\nStart: " + start + "Now: " + timeNow + "Passed: " + passed + "\n");
+    //System.out.println("\nStart: " + start + "Now: " + timeNow + "Passed: " + passed + "\n");
     if(passed % 30 == 0){
       finished = true;
     }

@@ -8,7 +8,7 @@ Wumpus wumpus;
 RandomWumpus randomWumpus;
 
 Board board;
-Timer timer = new Timer(2000);
+//Timer timer = new Timer(2000);
 
 int boardSize = 600;
 int rectSize = boardSize/8;
@@ -17,7 +17,7 @@ int rectSize = boardSize/8;
 void setup(){
   board = new Board();
   size(boardSize, boardSize);
-  timer.start();
+  //timer.start();
   
   player = new Player(0, 7);
   
@@ -77,11 +77,17 @@ void draw(){
   randomWumpus.display();
   
   //timer stuff
-    if(timer.finish()){
+    //if(timer.finish()){
+    delay(2000);
     wumpus.makeMove(board);
-    randomWumpus.makeMove();
-    timer.start();
-  }
+    //randomWumpus.makeMove();
+    //timer.start();
+  //}
+}
+
+void delay(int d){
+  int time = millis();
+  while(millis() - time <= d);
 }
 
 /*move if the player pressed a key. this is when the board updates. */
