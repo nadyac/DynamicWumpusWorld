@@ -5,6 +5,8 @@ int numberOfRectangles = 8;
 
 Player player;
 Wumpus wumpus;
+RandomWumpus randomWumpus;
+
 Board board;
 Timer timer = new Timer(2000);
 
@@ -20,7 +22,7 @@ void setup(){
   player = new Player(0, 7);
   
   wumpus = new Wumpus();
-  wumpus.getPossibleMoves();
+  randomWumpus = new RandomWumpus();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
@@ -72,8 +74,12 @@ void draw(){
   } 
   player.display();
   wumpus.display();
+  randomWumpus.display();
+  
+  //timer stuff
     if(timer.finish()){
     wumpus.makeMove(board);
+    randomWumpus.makeMove();
     timer.start();
   }
 }
@@ -103,9 +109,5 @@ void keyPressed(){
   else {
     print("\n\n\n\n\n");  
   }
-  
-  /*wumpus recalculates the player's location*/
-    
-
 
 }
