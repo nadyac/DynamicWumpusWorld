@@ -14,10 +14,16 @@ int boardSize = 600;
 int rectSize = boardSize/8;
 
 
+int time;
+
+boolean playerMove;
+
 void setup(){
   board = new Board();
   size(boardSize, boardSize);
   //timer.start();
+  time = millis();
+  playerMove = true;
   
   player = new Player(0, 7);
   
@@ -76,22 +82,29 @@ void draw(){
   wumpus.display();
   randomWumpus.display();
   
-  //timer stuff
-    //if(timer.finish()){
-    delay(2000);
+  /*wumpus movement for it's turn*/
+  if(millis() - time >= 1000 && playerMove == false){
     wumpus.makeMove(board);
-    //randomWumpus.makeMove();
-    //timer.start();
-  //}
+    randomWumpus.makeMove();
+    time = millis();
+    playerMove = true;
+  }
+  /*wumpus movement for when the player takes too long to move*/
+  if(millis() - time >= 5000 && playerMove == true){
+    wumpus.makeMove(board);
+    randomWumpus.makeMove();
+    time = millis();
+  }
 }
 
-void delay(int d){
+/*void delay(int d){
   int time = millis();
   while(millis() - time <= d);
-}
+}*/
 
 /*move if the player pressed a key. this is when the board updates. */
 void keyPressed(){
+  if(playerMove == true){
   /** Unsets the player's position from the old tile */
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
   /** Player makes their new move */
@@ -114,6 +127,8 @@ void keyPressed(){
   /** Otherwise, it is a safe tile and should "clear" the console */
   else {
     print("\n\n\n\n\n");  
+  }
+    playerMove = false;
   }
 
 }
