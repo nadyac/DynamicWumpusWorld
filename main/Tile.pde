@@ -4,6 +4,9 @@ class Tile{
   int xCoordinate;
   int yCoordinate;
   
+   int xGUI;
+  int yGUI;
+  
   boolean hasGold;
   boolean hasGlitter;
   boolean hasBreeze;
@@ -60,6 +63,14 @@ class Tile{
   
   boolean getStench() {
     return hasStench; 
+  }
+  
+   int getXGUI() {
+      return xGUI;
+  }
+  
+  int getYGUI() {
+     return yGUI; 
   }
   
   void display(){
