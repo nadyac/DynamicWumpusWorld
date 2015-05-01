@@ -4,7 +4,7 @@ int y;
 int numberOfRectangles = 8;
 
 Player player;
-Wumpus wumpus;
+AvoidingWumpus avoidingwumpus;
 RandomWumpus randomWumpus;
 
 Board board;
@@ -27,7 +27,7 @@ void setup(){
   
   player = new Player(0, 7);
   
-  wumpus = new Wumpus();
+  avoidingwumpus = new AvoidingWumpus();
   randomWumpus = new RandomWumpus();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
@@ -38,8 +38,8 @@ void setup(){
   
   Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   playerTile.setPlayer(true);
-  int x = wumpus.getXCoordinate();
-  int y = wumpus.getYCoordinate();
+  int x = avoidingwumpus.getXCoordinate();
+  int y = avoidingwumpus.getYCoordinate();
   Tile wumpusTile = board.getTile(x, y);
   wumpusTile.setWumpus(true);
   /** Setting all the tiles around the wumpus that have stench - this probably should be done in board, but wumpus is initiated here, so I kept it as is.
@@ -79,19 +79,19 @@ void draw(){
     }
   } 
   player.display();
-  wumpus.display();
+  avoidingwumpus.display();
   randomWumpus.display();
   
   /*wumpus movement for it's turn*/
   if(millis() - time >= 1000 && playerMove == false){
-    wumpus.makeMove(board);
+    avoidingwumpus.makeMove(board);
     randomWumpus.makeMove();
     time = millis();
     playerMove = true;
   }
   /*wumpus movement for when the player takes too long to move*/
   if(millis() - time >= 5000 && playerMove == true){
-    wumpus.makeMove(board);
+    avoidingwumpus.makeMove(board);
     randomWumpus.makeMove();
     time = millis();
   }

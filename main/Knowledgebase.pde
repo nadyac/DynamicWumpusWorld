@@ -7,7 +7,6 @@ class Knowledgebase{
   Tile[][] KB;  
   
   Knowledgebase() {
-    print("Susanna");
      KB = new Tile[8][8];
   }
   

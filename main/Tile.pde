@@ -4,7 +4,7 @@ class Tile{
   int xCoordinate;
   int yCoordinate;
   
-   int xGUI;
+  int xGUI;
   int yGUI;
   
   boolean hasGold;
@@ -41,6 +41,14 @@ class Tile{
   
   void setPlayer(boolean set){
     hasPlayer = set;
+  }
+  
+  void setXGUI(int x1) {
+    xGUI = x1;  
+  }
+  
+  void setYGUI(int y1) {
+     yGUI = y1; 
   }
   
   void updateXY(int x1, int y1){

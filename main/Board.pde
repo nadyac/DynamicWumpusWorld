@@ -13,6 +13,8 @@ class Board{
         board[i][j].setPit(false);
         //tile.setPit(false);
         board[i][j].updateXY(i*rectSize+rectSize/2,j*rectSize+rectSize/2);
+        board[i][j].setXGUI(i);
+        board[i][j].setYGUI(j);
       }
     }
   } 
