@@ -7,6 +7,9 @@ Player player;
 AvoidingWumpus avoidingwumpus;
 RandomWumpus randomWumpus;
 
+Arrow anArrow;
+PVector pos_player;
+
 Board board;
 //Timer timer = new Timer(2000);
 
@@ -26,6 +29,11 @@ void setup(){
   playerMove = true;
   
   player = new Player(0, 7);
+  
+  /* arrow stuff*/
+  pos_player = new PVector(player.getXGUI()-100, player.getYGUI()-100, 0);  //something off-screen so arrow cannot be seen initially
+  anArrow = new Arrow(pos_player);
+  pos_player = new PVector(0, 0, 0);
   
   avoidingwumpus = new AvoidingWumpus();
   randomWumpus = new RandomWumpus();
@@ -95,6 +103,9 @@ void draw(){
     randomWumpus.makeMove();
     time = millis();
   }
+  
+  anArrow.simulate();
+  anArrow.draw();
 }
 
 /*void delay(int d){
@@ -111,6 +122,10 @@ void keyPressed(){
   player.move();
   /** Sets the tile for the player's new position */
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(true);
+  
+  if(key == ' '){
+    anArrow = new Arrow(pos_player);
+  }
   
   /** If there is a tile near a pit and the wumpus */
    if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true && board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {

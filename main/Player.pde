@@ -31,6 +31,14 @@ class Player{
     return yCoordinate;
   }
   
+  int getXGUI(){
+    return xGUI; 
+  }
+  
+  int getYGUI(){
+    return yGUI; 
+  }
+  
   void setXCoordinate(int x){
     xCoordinate = x; 
   }
