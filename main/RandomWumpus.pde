@@ -1,5 +1,5 @@
-class Wumpus{
-  PImage wumpus = loadImage("wumpus.png");
+class RandomWumpus{
+  PImage randomWumpus = loadImage("randomwumpus.png");
   
   int xCoordinate;
   int yCoordinate;
@@ -10,7 +10,7 @@ class Wumpus{
   int speed = 75;
    
    /*Constructor*/
-   Wumpus(){
+   RandomWumpus(){
      /*Calculate starting coordinates*/
      xCoordinate = startX();
      yCoordinate = startY(); 
@@ -18,9 +18,6 @@ class Wumpus{
     /*Set the wumpus's coordinates in pixels*/
      xGUI = xCoordinate*75;
      yGUI = yCoordinate*75; 
-     
-     /*Create empty knowledgebase*/
-     Knowledgebase kb = new Knowledgebase();
   }
   
   /*Set x Coord for the Wumpus to start in*/
@@ -81,61 +78,28 @@ class Wumpus{
        }
        return possibleMoves;
   }
-  /**
-  * getPlayerLocation - scan the board's tiles for the location of the player 
-  */
-  int[] getPlayerLocation(Board b){
-    
-     /*get player's location by searching the board and store them in an array*/
-    for (int i = 0; i < 8; i++){
-       for(int j = 0; j < 8; j++){
-         if (b.getTile(i,j).hasPlayer == true){
-             int[] playerCoordinates = {i, j};
-             print("player coordinates: " + playerCoordinates[0] + "," + playerCoordinates[1] + "\n");
-             return playerCoordinates;
-         } 
-       }
-    }
-    return null;
-  }
-  
-  float calculateSound(int[] possibleMove, int[] playerLocation){
-    
-    float result;
-    //calculate straight line distance from player to given location
-    result = sqrt(pow(playerLocation[0]-possibleMove[0], 2) + pow(playerLocation[1]-possibleMove[1], 2));
-    return result;
-  }
    
-   /*Call necessary functions to get wumpus to move*/
-   void makeMove(Board b){
+   /*Choose a random move from the possible moves*/
+   void makeMove(){
      
-     float tmpSound = 0;
-     float sound = 9;
-     int[] bestMove = null;
-     boolean shouldMove = true;
+     int[] nextMove = null;
      
-     //get the player's location 
-      int[] playerLocation = getPlayerLocation(b);
+     //get the list of possible moves
       ArrayList<int[]> possibleMoves = getPossibleMoves();
       
-      //loop through each possible move and evaluate them
-      for (int[] possibleMove: possibleMoves){
-        tmpSound = calculateSound(possibleMove, playerLocation);
-        print("Tmp: " + tmpSound + " S: " + sound + "\n");
-        print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straigtLine dist: " + tmpSound + " current sound: " + sound + "\n");
-        if(tmpSound < sound){
-          sound = tmpSound;
-          bestMove = possibleMove; //current possible move is best so far 
-        } 
-      }
-      print("best move: " + bestMove[0] + "," + bestMove[1] + "\n");
-      move(bestMove);
+     //randomly choose a move from the list of moves
+      float randMove = random(0,2);
+      int randomMove = int(randMove);
+      print("next Move for RandomWumpus: " + possibleMoves.get(randomMove) + "\n");
+      nextMove = possibleMoves.get(randomMove);
+      
+      print("next move: " + nextMove[0] + "," + nextMove[1] + "\n");
+      move(nextMove);
      }
   
     /*Display the Wumpus on the board*/  
     void display(){
-      image(wumpus, xGUI, yGUI, 75, 75);
+      image(randomWumpus, xGUI, yGUI, 75, 75);
     }
     
     /*Move that Wumpus!*/

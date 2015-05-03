@@ -11,10 +11,10 @@ class Board{
         board[i][j] = new Tile();
         //Tile tile = board[i][j];
         board[i][j].setPit(false);
+        //tile.setPit(false);
+        board[i][j].updateXY(i*rectSize+rectSize/2,j*rectSize+rectSize/2);
         board[i][j].setXGUI(i);
         board[i][j].setYGUI(j);
-        //tile.setPit(false);
-        board[i][j].updateXY(i*rectSize+rectSize/2, j*rectSize+rectSize/2);
       }
     }
   } 
@@ -46,6 +46,33 @@ class Board{
            board[pit1-1][pit2].setBreeze(true); 
         }
      }
+   }
+   
+   //pre-condition: pits have to be set and Wumpus spawned
+   public void setGold(){
+     int gold1;
+     int gold2;
+     Tile tileToSet;
+     do {
+       float x = random(0, 8);
+       float y = random(0, 8);
+       gold1 = int(x);
+       gold2 = int(y);
+       tileToSet = board[gold1][gold2];
+     } while(tileToSet.getPit() == true || tileToSet.getWumpus());
+     tileToSet.setGold(true);
+        if (gold2 < 7) {
+           board[gold1][gold2+1].setGlitter(true); 
+        }
+        if (gold2 > 0) {
+           board[gold1][gold2-1].setGlitter(true);
+        }
+        if (gold1 < 7) {
+           board[gold1+1][gold2].setGlitter(true); 
+        }
+        if (gold1 > 0) {
+           board[gold1-1][gold2].setGlitter(true); 
+        }
    }
    
    public Tile getTile(int x, int y){

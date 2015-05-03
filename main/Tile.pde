@@ -1,18 +1,27 @@
 class Tile{
+  PImage gold = loadImage("goldBar.png");
+  
   int xCoordinate;
   int yCoordinate;
+  
   int xGUI;
   int yGUI;
   
   boolean hasGold;
+  boolean hasGlitter;
   boolean hasBreeze;
   boolean hasStench;
   boolean hasWumpus;
   boolean hasPlayer;
   boolean hasPit = false;
+  float safety = 0; 
   
   void setGold(boolean setGold){
     hasGold = setGold;
+  }
+  
+  void setGlitter(boolean set){
+    hasGlitter = set;
   }
   
   void setBreeze(boolean setBreeze){
@@ -35,12 +44,16 @@ class Tile{
     hasPlayer = set;
   }
   
-  void setXGUI(int xgui) {
-    xGUI = xgui;
+  void setXGUI(int x1) {
+    xGUI = x1;  
   }
   
-  void setYGUI (int ygui) {
-    yGUI = ygui;
+  void setYGUI(int y1) {
+     yGUI = y1; 
+  }
+  
+  void setSafety(float safetyRanking) {
+    safety = safetyRanking;
   }
   
   void updateXY(int x1, int y1){
@@ -65,7 +78,7 @@ class Tile{
     return hasStench; 
   }
   
-  int getXGUI() {
+   int getXGUI() {
       return xGUI;
   }
   
@@ -73,12 +86,8 @@ class Tile{
      return yGUI; 
   }
   
-  int getXCoordinate() {
-      return xCoordinate;
-  }
-  
-  int getYCoordinate() {
-     return yCoordinate;
+  float getSafety() {
+     return safety; 
   }
   
   void display(){
@@ -87,6 +96,10 @@ class Tile{
       ellipseMode(CENTER);
       ellipse(xCoordinate, yCoordinate, 50, 50);
     }
+    //the 25 was trial and error!
+    if(hasGold == true){
+      image(gold, xCoordinate-25, yCoordinate-25, 50, 50);
+    } 
   }
   
 }

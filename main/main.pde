@@ -4,31 +4,42 @@ int y;
 int numberOfRectangles = 8;
 
 Player player;
-Wumpus wumpus;
+AvoidingWumpus avoidingwumpus;
+RandomWumpus randomWumpus;
+
 Board board;
-Timer timer = new Timer(2000);
+//Timer timer = new Timer(2000);
 
 int boardSize = 600;
 int rectSize = boardSize/8;
 
 
+int time;
+
+boolean playerMove;
+
 void setup(){
   board = new Board();
   size(boardSize, boardSize);
-  timer.start();
+  //timer.start();
+  time = millis();
+  playerMove = true;
   
   player = new Player(0, 7);
+  
+  avoidingwumpus = new AvoidingWumpus();
+  randomWumpus = new RandomWumpus();
+  
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
   
   board.setPits();
+  board.setGold();
   
   Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   playerTile.setPlayer(true);
-  wumpus = new Wumpus();
-  wumpus.getPossibleMoves();
-  int x = wumpus.getXCoordinate();
-  int y = wumpus.getYCoordinate();
+  int x = avoidingwumpus.getXCoordinate();
+  int y = avoidingwumpus.getYCoordinate();
   Tile wumpusTile = board.getTile(x, y);
   wumpusTile.setWumpus(true);
   /** Setting all the tiles around the wumpus that have stench - this probably should be done in board, but wumpus is initiated here, so I kept it as is.
@@ -68,15 +79,32 @@ void draw(){
     }
   } 
   player.display();
-  wumpus.display();
-    if(timer.finish()){
-    wumpus.makeMove(board);
-    timer.start();
+  avoidingwumpus.display();
+  randomWumpus.display();
+  
+  /*wumpus movement for it's turn*/
+  if(millis() - time >= 1000 && playerMove == false){
+    avoidingwumpus.makeMove(board);
+    randomWumpus.makeMove();
+    time = millis();
+    playerMove = true;
+  }
+  /*wumpus movement for when the player takes too long to move*/
+  if(millis() - time >= 5000 && playerMove == true){
+    avoidingwumpus.makeMove(board);
+    randomWumpus.makeMove();
+    time = millis();
   }
 }
 
+/*void delay(int d){
+  int time = millis();
+  while(millis() - time <= d);
+}*/
+
 /*move if the player pressed a key. this is when the board updates. */
 void keyPressed(){
+  if(playerMove == true){
   /** Unsets the player's position from the old tile */
   board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
   /** Player makes their new move */
@@ -100,9 +128,7 @@ void keyPressed(){
   else {
     print("\n\n\n\n\n");  
   }
-  
-  /*wumpus recalculates the player's location*/
-    
-
+    playerMove = false;
+  }
 
 }
