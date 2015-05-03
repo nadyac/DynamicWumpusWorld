@@ -30,6 +30,6 @@ class Arrow{
   }
   
   void draw(){
-    image(arrowImg, p.x, p.y); 
+    image(arrowImg, p.x, p.y, 75, 25); 
   }
 }
