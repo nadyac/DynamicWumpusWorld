@@ -14,6 +14,7 @@ class Tile{
   boolean hasWumpus;
   boolean hasPlayer;
   boolean hasPit = false;
+  float safety = 0; 
   
   void setGold(boolean setGold){
     hasGold = setGold;
@@ -51,6 +52,10 @@ class Tile{
      yGUI = y1; 
   }
   
+  void setSafety(float safetyRanking) {
+    safety = safetyRanking;
+  }
+  
   void updateXY(int x1, int y1){
     xCoordinate = x1;
     yCoordinate = y1;
@@ -79,6 +84,10 @@ class Tile{
   
   int getYGUI() {
      return yGUI; 
+  }
+  
+  float getSafety() {
+     return safety; 
   }
   
   void display(){
