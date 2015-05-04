@@ -113,6 +113,8 @@ class AvoidingWumpus{
    void makeMove(Board b){
      Tile tempTile = b.getTile(xCoordinate, yCoordinate);
      kb.addKnowledge(tempTile);
+     kb.updateInference(b);
+     kb.SafeTile(xCoordinate, yCoordinate);
      float tmpSound = 0;
      float sound = 9;
      int[] bestMove = null;
@@ -127,11 +129,12 @@ class AvoidingWumpus{
         tmpSound = calculateSound(possibleMove, playerLocation);
         print("Tmp: " + tmpSound + " S: " + sound + "\n");
         print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straightLine dist: " + tmpSound + " current sound: " + sound + "\n");
-        Tile tempTile2 = b.getTile(possibleMove[0], possibleMove[1]);  
-        kb.addKnowledge(tempTile2);
+        //Tile tempTile2 = b.getTile(possibleMove[0], possibleMove[1]);  
+       // kb.addKnowledge(tempTile2);
         print("x1: " + possibleMove[0] + " y1: " + possibleMove[1] + "\n");
-        if (kb.getTile(possibleMove[0], possibleMove[1]).getPit() == true) {
-            tmpSound = tmpSound+1.5;    
+        if (kb.getTile(possibleMove[0], possibleMove[1]) != null) { 
+          print("Safety of this tile is: " + kb.getTile(possibleMove[0], possibleMove[1]).getSafety());
+          tmpSound = tmpSound + kb.getTile(possibleMove[0], possibleMove[1]).getSafety();  
         }
         if(tmpSound < sound){
           sound = tmpSound;
@@ -139,7 +142,7 @@ class AvoidingWumpus{
         }
       } 
       
-     // print("best move: " + bestMove[0] + "," + bestMove[1] + "\n");
+     print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
      }
   
@@ -171,7 +174,7 @@ class AvoidingWumpus{
           xGUI =  bestMove[0]*75;
           xCoordinate = bestMove[0];
         }     
-        print("wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
+        print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
     }
 }
   
