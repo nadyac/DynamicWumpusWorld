@@ -142,7 +142,7 @@ class AvoidingWumpus{
         }
       } 
       
-     print("best move: " + bestMove[0] + "," + bestMove[1] + "\n");
+     print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
      }
   
@@ -174,7 +174,7 @@ class AvoidingWumpus{
           xGUI =  bestMove[0]*75;
           xCoordinate = bestMove[0];
         }     
-        print("wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
+        print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
     }
 }
   

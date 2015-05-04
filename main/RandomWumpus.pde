@@ -72,10 +72,12 @@ class RandomWumpus{
          possibleMoves.add(move3);
       } 
        //print the possible moves (remove this later)
+       /*
        print("possible wumpus moves: \n");
        for(int[] moves: possibleMoves){
          print(moves[0]+ "," + moves[1] + "\n");
        }
+       */
        return possibleMoves;
   }
    
@@ -90,10 +92,10 @@ class RandomWumpus{
      //randomly choose a move from the list of moves
       float randMove = random(0,2);
       int randomMove = int(randMove);
-      print("next Move for RandomWumpus: " + possibleMoves.get(randomMove) + "\n");
+      //print("next Move for RandomWumpus: " + possibleMoves.get(randomMove) + "\n");
       nextMove = possibleMoves.get(randomMove);
       
-      print("next move: " + nextMove[0] + "," + nextMove[1] + "\n");
+      //print("next move: " + nextMove[0] + "," + nextMove[1] + "\n");
       move(nextMove);
      }
   
@@ -126,7 +128,7 @@ class RandomWumpus{
         xGUI =  bestMove[0]*75;
         xCoordinate = bestMove[0];
       }     
-          print("wumpus location: " + xCoordinate + "," + yCoordinate + "\n");
+          //print("wumpus location: " + xCoordinate + "," + yCoordinate + "\n");
     }
 }
   
