@@ -5,7 +5,7 @@ int numberOfRectangles = 8;
 
 Player player;
 AvoidingWumpus avoidingwumpus;
-RandomWumpus randomWumpus;
+//RandomWumpus randomWumpus;
 
 Board board;
 //Timer timer = new Timer(2000);
@@ -14,7 +14,14 @@ int boardSize = 600;
 int rectSize = boardSize/8;
 
 //the # of turns the player has taken before the Wumpus moves
-int playerTurns = 0;
+int playerTurns;
+//2 if wumpus is not in a pit, 4 if wumpus is in a pit
+int playerMoves = 2;
+
+//# of turns the wumpus has been under penalty
+int WumpusPenaltyTurns = 0;
+//is Wumpus in a pit?
+boolean wumpusPit = false;
 
 int time;
 
@@ -30,7 +37,7 @@ void setup(){
   player = new Player(0, 7);
   
   avoidingwumpus = new AvoidingWumpus();
-  randomWumpus = new RandomWumpus();
+  //randomWumpus = new RandomWumpus();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
@@ -84,13 +91,26 @@ void draw(){
   } 
   player.display();
   avoidingwumpus.display();
-  randomWumpus.display();
+  //randomWumpus.display();
   
   /*wumpus movement for it's turn*/
   if(/*millis() - time >= 1000 &&*/ playerMove == false){
-    if(playerTurns == 2){
+    for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if(board.getTile(i, j).getWumpus() && board.getTile(i, j).getPit()){
+          wumpusPit = true;
+        }
+      }
+    }
+    if(wumpusPit){
+      playerMoves = 4; 
+    }
+    else{
+      playerMoves = 2;
+    }
+    if(playerTurns == playerMoves){
       avoidingwumpus.makeMove(board);
-      randomWumpus.makeMove();
+      //randomWumpus.makeMove();
       //time = millis();
       
       playerTurns = 0;
@@ -120,6 +140,7 @@ void keyPressed(){
     /** Player makes their new move */
     player.move();
     playerTurns++;
+    
     /** Sets the tile for the player's new position */
     board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(true);
     
