@@ -19,7 +19,7 @@ int playerTurns;
 int playerMoves = 2;
 
 //# of turns the wumpus has been under penalty
-int WumpusPenaltyTurns = 0;
+//int wumpusPenaltyTurns = 0;
 //is Wumpus in a pit?
 boolean wumpusPit = false;
 
@@ -97,23 +97,29 @@ void draw(){
   if(/*millis() - time >= 1000 &&*/ playerMove == false){
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
-        if(board.getTile(i, j).getWumpus() && board.getTile(i, j).getPit()){
+        if(board.getTile(avoidingwumpus.getXCoordinate(), avoidingwumpus.getYCoordinate()).getPit()){
           wumpusPit = true;
         }
       }
     }
+    print(wumpusPit);
     if(wumpusPit){
       playerMoves = 4; 
+      
     }
     else{
       playerMoves = 2;
     }
+    
+    print(wumpusPit);
+    
     if(playerTurns == playerMoves){
       avoidingwumpus.makeMove(board);
       //randomWumpus.makeMove();
       //time = millis();
-      
       playerTurns = 0;
+      wumpusPit = false;
+      
     }
     playerMove = true;
   }
@@ -139,6 +145,7 @@ void keyPressed(){
     board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
     /** Player makes their new move */
     player.move();
+    
     playerTurns++;
     
     /** Sets the tile for the player's new position */
