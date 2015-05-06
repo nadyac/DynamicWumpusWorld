@@ -8,7 +8,6 @@ class Tile{
   int yGUI;
   
   boolean goldPickedUp = false;
-  
   boolean hasGold;
   boolean hasGlitter;
   boolean hasBreeze;
@@ -17,7 +16,7 @@ class Tile{
   boolean hasPlayer;
   boolean hasPit = false;
   float safety = 0; 
-  
+  float sound;
   void setGold(boolean setGold){
     hasGold = setGold;
   }
@@ -45,6 +44,11 @@ class Tile{
   void setPlayer(boolean set){
     hasPlayer = set;
   }
+  
+  void setSound(float playerSound) {
+     sound = playerSound; 
+  }
+  
   
   void setXGUI(int x1) {
     xGUI = x1;  
@@ -95,6 +99,12 @@ class Tile{
   float getSafety() {
      return safety; 
   }
+  
+  float getSound() {
+      return sound;
+  }
+  
+  
   
   void display(){
     if(hasPit == true){

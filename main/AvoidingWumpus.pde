@@ -129,6 +129,8 @@ class AvoidingWumpus{
         tmpSound = calculateSound(possibleMove, playerLocation);
         print("Tmp: " + tmpSound + " S: " + sound + "\n");
         print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straightLine dist: " + tmpSound + " current sound: " + sound + "\n");
+        //Sets each possible wumpus move's sound for the player 
+        b.getTile(possibleMove[0], possibleMove[1]).setSound(tmpSound);
         //Tile tempTile2 = b.getTile(possibleMove[0], possibleMove[1]);  
        // kb.addKnowledge(tempTile2);
         print("x1: " + possibleMove[0] + " y1: " + possibleMove[1] + "\n");
