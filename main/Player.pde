@@ -2,6 +2,7 @@ class Player{
   PImage player = loadImage("archer1.png");
   int xCoordinate; 
   int yCoordinate;
+  Knowledgebase kb;
   
  /* xGUI: player's x coord in pixels
     yGUI: player's y coord in pixels */
@@ -12,6 +13,7 @@ class Player{
   int speed = 75;
   
   Player(int x1, int y1){
+   kb = new Knowledgebase();
    xCoordinate = x1;
    yCoordinate = y1; 
    
@@ -29,6 +31,10 @@ class Player{
   
   int getYCoordinate(){
     return yCoordinate;
+  }
+  
+  Knowledgebase getKB() {
+     return kb; 
   }
   
   void setXCoordinate(int x){

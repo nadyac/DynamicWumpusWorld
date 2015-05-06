@@ -145,7 +145,8 @@ void keyPressed(){
     board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
     /** Player makes their new move */
     player.move();
-    
+    player.getKB().addKnowledge(board.getTile(player.getXCoordinate(), player.getYCoordinate()));
+    //print(player.getKB().getTile().getYGUI());
     playerTurns++;
     
     /** Sets the tile for the player's new position */

@@ -17,7 +17,7 @@ class Tile{
   boolean hasPlayer;
   boolean hasPit = false;
   float safety = 0; 
-  
+  float sound;
   void setGold(boolean setGold){
     hasGold = setGold;
   }
@@ -62,6 +62,10 @@ class Tile{
     safety = safetyRanking;
   }
   
+  void setSound(float playerSound) {
+     sound = playerSound; 
+  }
+  
   void updateXY(int x1, int y1){
     xCoordinate = x1;
     yCoordinate = y1;
@@ -98,6 +102,10 @@ class Tile{
   
   float getSafety() {
      return safety; 
+  }
+  
+  float getSound() {
+     return sound; 
   }
   
   void display(){
