@@ -85,6 +85,7 @@ void draw(){
       
       //if(x%2 == 0 && y%2 == 0){
          Tile tile = board.getTile(x, y);
+         player.checkForGold(board);
          tile.display();
      // }
     }
