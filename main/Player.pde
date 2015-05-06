@@ -62,4 +62,10 @@ class Player{
     }       
   }
   
+  void checkForGold(Board board) {
+    if(board.getTile(xCoordinate, yCoordinate).getGold()){
+      board.getTile(xCoordinate, yCoordinate).setGoldPickedUp(true);
+    } 
+  }
+  
 }
