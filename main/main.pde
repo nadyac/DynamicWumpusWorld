@@ -191,7 +191,7 @@ void mainScreen(){
   }
   
   /*wumpus movement for it's turn*/
-  if(/*millis() - time >= 1000 &&*/ playerMove == false){
+  if(millis() - time >= 5000 && playerMove == false){
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
         if(board.getTile(astarwumpus.getXCoordinate(), astarwumpus.getYCoordinate()).getPit()){
