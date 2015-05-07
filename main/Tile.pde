@@ -7,8 +7,6 @@ class Tile{
   int xGUI;
   int yGUI;
   
-  boolean goldPickedUp = false;
-  
   boolean hasGold;
   boolean hasGlitter;
   boolean hasBreeze;
@@ -18,6 +16,7 @@ class Tile{
   boolean hasPit = false;
   float safety = 0; 
   float sound;
+  
   void setGold(boolean setGold){
     hasGold = setGold;
   }
@@ -52,10 +51,6 @@ class Tile{
   
   void setYGUI(int y1) {
      yGUI = y1; 
-  }
-  
-  void setGoldPickedUp(boolean gpu) {
-     goldPickedUp = gpu;
   }
   
   void setSafety(float safetyRanking) {
@@ -108,14 +103,14 @@ class Tile{
      return sound; 
   }
   
-  void display(){
+  void display(Board board){
     if(hasPit == true){
       fill(0);
       ellipseMode(CENTER);
       ellipse(xCoordinate, yCoordinate, 50, 50);
     }
     //the 25 was trial and error!
-    if(hasGold == true && !goldPickedUp){
+    if(hasGold == true && !board.getGoldPickedUp()){
       image(gold, xCoordinate-25, yCoordinate-25, 50, 50);
     } 
   }

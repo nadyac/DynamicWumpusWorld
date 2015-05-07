@@ -5,6 +5,8 @@ class Board{
   final int rectSize = boardPix/8;
   Tile[][] board = new Tile [size][size];
   
+  boolean goldPickedUp = false;
+  
   public Board(){
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
@@ -78,6 +80,14 @@ class Board{
    public Tile getTile(int x, int y){
      //print(x + ", " + y);
      return board[x][y]; 
+   }
+   
+   void setGoldPickedUp(boolean gpu) {
+     goldPickedUp = gpu;
+   }
+   
+   boolean getGoldPickedUp(){
+     return goldPickedUp; 
    }
    
 }

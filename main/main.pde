@@ -86,7 +86,7 @@ void draw(){
       //if(x%2 == 0 && y%2 == 0){
          Tile tile = board.getTile(x, y);
          player.checkForGold(board);
-         tile.display();
+         tile.display(board);
      // }
     }
   } 
@@ -103,7 +103,7 @@ void draw(){
         }
       }
     }
-    print(wumpusPit);
+    //print(wumpusPit);
     if(wumpusPit){
       playerMoves = 4; 
       
@@ -112,7 +112,7 @@ void draw(){
       playerMoves = 2;
     }
     
-    print(wumpusPit);
+    //print(wumpusPit);
     
     if(playerTurns == playerMoves){
       avoidingwumpus.makeMove(board);
@@ -121,6 +121,10 @@ void draw(){
       playerTurns = 0;
       wumpusPit = false;
       
+    }
+    if(player.getXCoordinate() == 0 && player.getYCoordinate() == 7 && board.getGoldPickedUp()){
+      print("YOU ESCAPED THE CAVE WITH THE GOLD!!!");
+      exit();
     }
     playerMove = true;
   }
