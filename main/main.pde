@@ -213,7 +213,7 @@ void mainScreen(){
     
     if(playerTurns == playerMoves){
      // avoidingwumpus.makeMove(board, SFXpit);
-      astarwumpus.makeMove(board, SFXpit);
+     // astarwumpus.makeMove(board, SFXpit);
        if (screens == 1 || screens == 4){
       randomWumpus.makeMove(SFXpit);
     }
@@ -334,6 +334,10 @@ void deadScreen(){
   fill(255);
   textSize(88);
   text("YOU DIED", 250, 100);
+  if(!SFXinception.isPlaying()){
+      SFXinception.rewind();}
+    SFXinception.play();
+  
 }
 
 void goldScreen(){

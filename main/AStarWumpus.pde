@@ -174,12 +174,12 @@ class AStarWumpus{
      print ("**************************************************** \n");
       move(bestMove);
       
-      /* if(board.getTile(xCoordinate, yCoordinate).getPit()){
+      if(board.getTile(xCoordinate, yCoordinate).getPit()){
         if(!SFXpit.isPlaying()) {
           SFXpit.rewind();
           SFXpit.play();
         }
-      } */
+      } 
       
      }
   
