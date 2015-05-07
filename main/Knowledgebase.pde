@@ -16,7 +16,7 @@ class Knowledgebase{
     Tile tempTile = tile;
    int x =  tempTile.getXGUI();
    int y =  tempTile.getYGUI();
-      print("x2: " + x + " y2: " + y);
+      //print("x2: " + x + " y2: " + y);
     KB[x][y] = tempTile; 
   }
   

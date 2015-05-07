@@ -176,5 +176,9 @@ class AvoidingWumpus{
         }     
         print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
     }
+    
+    public Knowledgebase getKB(){
+       return kb; 
+    }
 }
   

@@ -6,21 +6,26 @@ int numberOfRectangles = 8;
 Player player;
 AvoidingWumpus avoidingwumpus;
 RandomWumpus randomWumpus;
+Knowledgebase kbDemo1;
+Knowledgebase kbDemo2;
+Knowledgebase kbPlay;
 
 Board board;
-//Timer timer = new Timer(2000);
+Knowledgebase GUIKB;
 
 int boardSize = 600;
 int rectSize = boardSize/8;
 
 
 int time;
+int screens = 0;
 
 boolean playerMove;
 
+
 void setup(){
   board = new Board();
-  size(boardSize, boardSize);
+  size(boardSize*2+10, boardSize+100);
   //timer.start();
   time = millis();
   playerMove = true;
@@ -29,6 +34,10 @@ void setup(){
   
   avoidingwumpus = new AvoidingWumpus();
   randomWumpus = new RandomWumpus();
+  
+  GUIKB = new Knowledgebase();
+  kbDemo1 = avoidingwumpus.getKB();
+  //kbDemo2 = astarwumpus.getKB();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
@@ -62,25 +71,80 @@ void setup(){
       wt4.setStench(true);
    }
   smooth();
+  
 }
 
 
 void draw(){
-  for (x = 0; x < numberOfRectangles; x++){
+  if(screens == 0){
+    openScreen();
+  }
+  else{
+    mainScreen();
+  }
+   
+}
+
+void mainScreen(){
+  textSize(12);
+   for (x = 0; x < numberOfRectangles; x++){
     for (y = 0; y < numberOfRectangles; y++){
       fill(153);
       stroke(0);
       rect(x*rectSize, y*rectSize, rectSize, rectSize);
-      
-      //if(x%2 == 0 && y%2 == 0){
+      rect(x*rectSize+610, y*rectSize, rectSize, rectSize);
+      fill(0);
+      if(screens == 1 || screens == 2 || screens == 3){
          Tile tile = board.getTile(x, y);
          tile.display();
-     // }
+      }
+         Tile tempTile = null;
+         if(screens == 1){
+           textSize(48);
+           text("NO KNOWLEDGEBASE", 665, 300);
+         }
+         textSize(12);
+         if(screens == 2) {
+           tempTile = kbDemo1.getTile(x,y);
+         }
+         if(screens == 3) {
+           tempTile = kbDemo2.getTile(x,y);
+         }
+         if(screens == 4 || screens == 5 || screens == 6){
+           tempTile = kbDemo1.getTile(x,y);
+         }
+         Tile newTile = new Tile();
+         if(tempTile !=null){
+           newTile.setXGUI(x);
+           newTile.setYGUI(y);
+           newTile.updateXY(tempTile.getXCoordinate(), tempTile.getYCoordinate());
+           newTile.setPit(tempTile.getPit());
+           newTile.setBreeze(tempTile.getBreeze());
+           newTile.setStench(tempTile.getStench());
+           newTile.setGlitter(tempTile.getGlitter());
+           newTile.setGold(tempTile.getGold());
+           GUIKB.addKnowledge(newTile);
+         }
+         
+         Tile kbTile = GUIKB.getTile(x,y);
+         if(kbTile != null){
+           int xG = kbTile.getXCoordinate();
+           int yG = kbTile.getYCoordinate();
+           kbTile.updateXY(xG+610, yG);
+           kbTile.display();
+         }
     }
   } 
   player.display();
-  avoidingwumpus.display();
-  randomWumpus.display();
+  if(screens == 1){
+    randomWumpus.display();
+  }
+  if(screens == 2){
+    avoidingwumpus.display();
+  }
+  if (screens == 3){
+    //astarwumpus.display();
+  }
   
   /*wumpus movement for it's turn*/
   if(millis() - time >= 1000 && playerMove == false){
@@ -97,12 +161,52 @@ void draw(){
   }
 }
 
-/*void delay(int d){
-  int time = millis();
-  while(millis() - time <= d);
-}*/
+void openScreen(){
+  fill(255);
+  textSize(88);
+  text("WUMPUS WORLD", 250, 100);
+  textSize(50);
+  text("DEMO", 150, 260);
+  rect(75,280,300,100);
+  fill(0);
+  textSize(32);
+  text("RANDOM WUMPUS", 83, 345);
+  
+  fill(255);
+  rect(75,400,300,100);
+  fill(0);
+  textSize(32);
+  text("GREEDY WUMPUS", 94, 460);
+  
+  fill(255);
+  rect(75,520,300,100);
+  fill(0);
+  textSize(32);
+  text("A* WUMPUS", 130, 580);
+  
+  textSize(50);
+  fill(255);
+  text("PLAY", 900, 260);
+  rect(815,280,300,100);
+  fill(0);
+  textSize(32);
+  text("RANDOM WUMPUS", 822, 345);
+  
+  fill(255);
+  rect(815,400,300,100);
+  fill(0);
+  textSize(32);
+  text("GREEDY WUMPUS", 833, 460);
+  
+  fill(255);
+  rect(815,520,300,100);
+  fill(0);
+  textSize(32);
+  text("A* WUMPUS", 878, 580);
+}
 
 /*move if the player pressed a key. this is when the board updates. */
+String output = " ";
 void keyPressed(){
   if(playerMove == true){
   /** Unsets the player's position from the old tile */
@@ -114,21 +218,67 @@ void keyPressed(){
   
   /** If there is a tile near a pit and the wumpus */
    if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true && board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
-      print("There is a stenchy breeze...\n\n\n");  
+      print("There is a stenchy breeze...\n\n\n"); 
+      output = "There is a stenchy breeze...\n\n\n";
+      fill(255);
+      text(output, 100, 650); 
    }
    /** If there is a tile only near a pit */
    else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
       print("There is a breeze..." + "\n\n\n");  
+      output = "There is a breeze...";
+      fill(255);
+      text(output, 100, 650);
    }
    /** If there is a tile only near the wumpus */
    else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true) {
       print("There is a stench..." + "\n\n\n");  
+      output = "There is a stench...";
+      fill(255);
+      text(output, 100, 650);
   }
   /** Otherwise, it is a safe tile and should "clear" the console */
   else {
-    print("\n\n\n\n\n");  
+    print("\n\n\n\n\n"); 
+   output = " "; 
+   fill(255);
+      text(output, 100, 650);
   }
     playerMove = false;
+    output = " "; 
+   fill(255);
+      text(output, 100, 650);
   }
 
+}
+
+void mouseClicked(){
+ if(mouseX > 75 && mouseX < 375){
+   if(mouseY > 280 && mouseY < 380){
+     clear();
+     screens = 1;
+   }
+   if(mouseY > 400 && mouseY < 500){
+     clear();
+     screens = 2;
+   }
+   if(mouseY > 520 && mouseY < 620){
+     clear();
+     screens = 3;
+   }
+ }
+ if(mouseX > 815 && mouseX < 1115){
+   if(mouseY > 280 && mouseY < 380){
+     clear();
+     screens = 4;
+   }
+   if(mouseY > 400 && mouseY < 500){
+     clear();
+     screens = 5;
+   }
+   if(mouseY > 520 && mouseY < 620){
+     clear();
+     screens = 6;
+   }  
+ } 
 }

@@ -78,6 +78,14 @@ class Tile{
     return hasStench; 
   }
   
+  boolean getGlitter() {
+    return hasGlitter; 
+  }
+  
+  boolean getGold() {
+    return hasGold; 
+  }
+  
    int getXGUI() {
       return xGUI;
   }
@@ -90,9 +98,17 @@ class Tile{
      return safety; 
   }
   
+  int getXCoordinate() {
+      return xCoordinate;
+  }
+  
+  int getYCoordinate() {
+     return yCoordinate; 
+  }
+  
   void display(){
     if(hasPit == true){
-      fill(0);
+      fill(0, 50);
       ellipseMode(CENTER);
       ellipse(xCoordinate, yCoordinate, 50, 50);
     }
@@ -100,6 +116,14 @@ class Tile{
     if(hasGold == true){
       image(gold, xCoordinate-25, yCoordinate-25, 50, 50);
     } 
+    if(hasGlitter == true){
+      fill(0);
+      text("G", xCoordinate-25, yCoordinate-25);
+    }
+    if(hasBreeze == true){
+      fill(0);
+      text("B", xCoordinate-35, yCoordinate-25);
+    }
   }
   
 }
