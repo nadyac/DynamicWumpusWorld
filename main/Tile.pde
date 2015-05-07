@@ -112,10 +112,6 @@ class Tile{
       ellipseMode(CENTER);
       ellipse(xCoordinate, yCoordinate, 50, 50);
     }
-    //the 25 was trial and error!
-    if(hasGold == true){
-      image(gold, xCoordinate-25, yCoordinate-25, 50, 50);
-    } 
     if(hasGlitter == true){
       fill(0);
       text("G", xCoordinate-25, yCoordinate-25);
