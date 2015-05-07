@@ -67,6 +67,10 @@ class Tile{
     
   }
   
+  boolean getPlayer() {
+    return hasPlayer; 
+  }
+  
   boolean getPit() {
     return hasPit;  
   }

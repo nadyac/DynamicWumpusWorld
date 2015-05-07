@@ -1,5 +1,15 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
 class AvoidingWumpus{
   PImage wumpus = loadImage("wumpus.png");
+  
+  Minim minim;
+  AudioPlayer SFXpit;
   
   int xCoordinate;
   int yCoordinate;
@@ -110,7 +120,7 @@ class AvoidingWumpus{
   }
    
    /*Call necessary functions to get wumpus to move*/
-   void makeMove(Board b){
+   void makeMove(Board b, AudioPlayer SFXpit){
      Tile tempTile = b.getTile(xCoordinate, yCoordinate);
      kb.addKnowledge(tempTile);
      kb.updateInference(b);
@@ -146,6 +156,11 @@ class AvoidingWumpus{
       
      print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
+      if(board.getTile(xCoordinate, yCoordinate).getPit()){
+        if(!SFXpit.isPlaying())
+          SFXpit.rewind();
+        SFXpit.play();
+      }
      }
   
     /*Display the Wumpus on the board*/  
@@ -159,22 +174,25 @@ class AvoidingWumpus{
         if (yGUI != 0 && yCoordinate!=0) {
           yGUI = bestMove[1]*75;
           yCoordinate = bestMove[1];
-           
+         
          } 
          //move up one square
         if (yGUI!=600 && yCoordinate!=7) {
           yGUI = bestMove[1]*75;
           yCoordinate = bestMove[1];
+          
         }
         //move to the right 1 square
         if (xGUI!=600 && xCoordinate!=7) {
           xGUI = bestMove[0]*75;
           xCoordinate = bestMove[0];
+          
         }
         //move to the left 1 square
         if (xGUI!=0 && xCoordinate!=0) {
           xGUI =  bestMove[0]*75;
           xCoordinate = bestMove[0];
+          
         }     
         print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
     }

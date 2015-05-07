@@ -6,12 +6,14 @@ import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
 Minim minim;
-AudioPlayer SFX;
+AudioPlayer SFXgold, SFXinception, SFXpit;
 
 int x;
 int y;
 
 int numberOfRectangles = 8;
+
+boolean goldFound = false;
 
 Player player;
 AvoidingWumpus avoidingwumpus;
@@ -45,7 +47,12 @@ void setup(){
   playerMove = true;
   
   minim = new Minim(this);
-  SFX = minim.loadFile("goldsfx.wav");
+  SFXgold = minim.loadFile("goldsfx.wav");
+  //SFXgold.loop();
+  SFXpit = minim.loadFile("pitsfx.wav");
+  //SFXpit.loop();
+  SFXinception = minim.loadFile("inception.mp3");
+  //SFXinception.loop();
   
   player = new Player(0, 7);
   
@@ -99,8 +106,11 @@ void draw(){
       //if(x%2 == 0 && y%2 == 0){
          Tile tile = board.getTile(x, y);
          boolean goldCheck = player.checkForGold(board);
-         if(goldCheck){
-           SFX.play();
+         if(goldCheck && !goldFound){
+           if(!SFXgold.isPlaying())
+             SFXgold.rewind();
+           SFXgold.play();
+           goldFound=true;
          }
          tile.display(board);
      // }
@@ -116,6 +126,9 @@ void draw(){
       for(int j = 0; j < 8; j++){
         if(board.getTile(avoidingwumpus.getXCoordinate(), avoidingwumpus.getYCoordinate()).getPit()){
           wumpusPit = true;
+          //if(!SFXpit.isPlaying())
+            //SFXpit.rewind();
+          //SFXpit.play();
         }
       }
     }
@@ -131,7 +144,7 @@ void draw(){
     //print(wumpusPit);
     
     if(playerTurns == playerMoves){
-      avoidingwumpus.makeMove(board);
+      avoidingwumpus.makeMove(board, SFXpit);
       //randomWumpus.makeMove();
       //time = millis();
       playerTurns = 0;
@@ -156,6 +169,24 @@ void draw(){
     //time = millis();
   }
   */
+  /*
+  SFXpit.rewind();
+  SFXgold.rewind();
+  */
+  /*
+  for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if(board.getTile(i, j).getWumpus() && board.getTile(i, j).getPlayer()){
+          SFXinception.play();
+        }
+      }
+  }
+  */
+  if(avoidingwumpus.getXCoordinate()==player.getXCoordinate() && avoidingwumpus.getYCoordinate()==player.getYCoordinate()){
+    if(!SFXinception.isPlaying())
+      SFXinception.rewind();
+    SFXinception.play();
+  }
 }
 
 /*void delay(int d){
