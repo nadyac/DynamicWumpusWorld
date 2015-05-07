@@ -94,7 +94,7 @@ void mainScreen(){
       rect(x*rectSize, y*rectSize, rectSize, rectSize);
       rect(x*rectSize+610, y*rectSize, rectSize, rectSize);
       fill(0);
-      if(screens == 1 || screens == 2 || screens == 3){
+      if(screens == 1 || screens == 2 || screens == 3 || screens == 7){
          Tile tile = board.getTile(x, y);
          tile.display();
       }
@@ -104,7 +104,7 @@ void mainScreen(){
            text("NO KNOWLEDGEBASE", 665, 300);
          }
          textSize(12);
-         if(screens == 2) {
+         if(screens == 2 || screens == 7 || screens == 8) {
            tempTile = kbDemo1.getTile(x,y);
          }
          if(screens == 3) {
@@ -136,20 +136,27 @@ void mainScreen(){
     }
   } 
   player.display();
-  if(screens == 1){
+  if(screens == 1 || screens == 7){
     randomWumpus.display();
   }
-  if(screens == 2){
+  if(screens == 2 || screens == 7){
     avoidingwumpus.display();
   }
-  if (screens == 3){
+  if (screens == 3 || screens == 7){
     //astarwumpus.display();
   }
   
   /*wumpus movement for it's turn*/
   if(millis() - time >= 1000 && playerMove == false){
-    avoidingwumpus.makeMove(board);
-    randomWumpus.makeMove();
+    if (screens == 1 || screens == 4 || screens == 7 || screens == 8){
+      randomWumpus.makeMove();
+    }
+    if(screens == 2 || screens == 5 || screens == 7 || screens == 8){
+      avoidingwumpus.makeMove(board);
+    }
+    if (screens == 3 || screens == 6 || screens == 7 || screens == 8){
+      
+    }
     time = millis();
     playerMove = true;
   }
@@ -166,43 +173,55 @@ void openScreen(){
   textSize(88);
   text("WUMPUS WORLD", 250, 100);
   textSize(50);
-  text("DEMO", 150, 260);
-  rect(75,280,300,100);
+  text("DEMO", 150, 160);
+  rect(75,180,300,100);
   fill(0);
   textSize(32);
-  text("RANDOM WUMPUS", 83, 345);
+  text("RANDOM WUMPUS", 83, 245);
   
   fill(255);
-  rect(75,400,300,100);
+  rect(75,300,300,100);
   fill(0);
   textSize(32);
-  text("GREEDY WUMPUS", 94, 460);
+  text("GREEDY WUMPUS", 94, 360);
   
   fill(255);
-  rect(75,520,300,100);
+  rect(75,420,300,100);
   fill(0);
   textSize(32);
-  text("A* WUMPUS", 130, 580);
+  text("A* WUMPUS", 130, 480);
+  
+  fill(255);
+  rect(75,540,300,100);
+  fill(0);
+  textSize(32);
+  text("GOD MODE", 135, 600);
   
   textSize(50);
   fill(255);
-  text("PLAY", 900, 260);
-  rect(815,280,300,100);
+  text("PLAY", 900, 160);
+  rect(815,180,300,100);
   fill(0);
   textSize(32);
-  text("RANDOM WUMPUS", 822, 345);
+  text("RANDOM WUMPUS", 822, 245);
   
   fill(255);
-  rect(815,400,300,100);
+  rect(815,300,300,100);
   fill(0);
   textSize(32);
-  text("GREEDY WUMPUS", 833, 460);
+  text("GREEDY WUMPUS", 833, 360);
   
   fill(255);
-  rect(815,520,300,100);
+  rect(815,420,300,100);
   fill(0);
   textSize(32);
-  text("A* WUMPUS", 878, 580);
+  text("A* WUMPUS", 878, 480);
+  
+  fill(255);
+  rect(815,540,300,100);
+  fill(0);
+  textSize(32);
+  text("GOD MODE", 878, 600);
 }
 
 /*move if the player pressed a key. this is when the board updates. */
@@ -221,7 +240,7 @@ void keyPressed(){
       print("There is a stenchy breeze...\n\n\n"); 
       output = "There is a stenchy breeze...\n\n\n";
       fill(255);
-      text(output, 100, 650); 
+      text(output, 100, 640); 
    }
    /** If there is a tile only near a pit */
    else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
@@ -235,50 +254,60 @@ void keyPressed(){
       print("There is a stench..." + "\n\n\n");  
       output = "There is a stench...";
       fill(255);
-      text(output, 100, 650);
+      text(output, 100, 630);
+  }
+  else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getGlitter() == true) {
+      print("There is glitter..." + "\n\n\n");  
+      output = "There is glitter...";
+      fill(255);
+      text(output, 100, 670);
   }
   /** Otherwise, it is a safe tile and should "clear" the console */
   else {
     print("\n\n\n\n\n"); 
-   output = " "; 
-   fill(255);
-      text(output, 100, 650);
+   fill(0);
+   rect(95, 640, 200, 400);
   }
     playerMove = false;
-    output = " "; 
-   fill(255);
-      text(output, 100, 650);
   }
 
 }
 
 void mouseClicked(){
  if(mouseX > 75 && mouseX < 375){
-   if(mouseY > 280 && mouseY < 380){
+   if(mouseY > 180 && mouseY < 280){
      clear();
      screens = 1;
    }
-   if(mouseY > 400 && mouseY < 500){
+   if(mouseY > 300 && mouseY < 400){
      clear();
      screens = 2;
    }
-   if(mouseY > 520 && mouseY < 620){
+   if(mouseY > 420 && mouseY < 520){
      clear();
      screens = 3;
    }
+   if(mouseY > 540 && mouseY < 640){
+     clear();
+     screens = 7;
+   }
  }
  if(mouseX > 815 && mouseX < 1115){
-   if(mouseY > 280 && mouseY < 380){
+   if(mouseY > 180 && mouseY < 280){
      clear();
      screens = 4;
    }
-   if(mouseY > 400 && mouseY < 500){
+   if(mouseY > 300 && mouseY < 400){
      clear();
      screens = 5;
    }
-   if(mouseY > 520 && mouseY < 620){
+   if(mouseY > 420 && mouseY < 520){
      clear();
      screens = 6;
    }  
+   if(mouseY > 540 && mouseY < 640){
+     clear();
+     screens = 8;
+   }
  } 
 }
