@@ -16,12 +16,15 @@ int numberOfRectangles = 8;
 boolean goldFound = false;
 
 Player player;
-//AvoidingWumpus avoidingwumpus;
+AvoidingWumpus avoidingwumpus;
+RandomWumpus randomWumpus;
 AStarWumpus astarwumpus;
-//RandomWumpus randomWumpus;
+Knowledgebase kbDemo1;
+Knowledgebase kbDemo2;
+Knowledgebase kbPlay;
 
 Board board;
-//Timer timer = new Timer(2000);
+Knowledgebase GUIKB;
 
 int boardSize = 600;
 int rectSize = boardSize/8;
@@ -37,12 +40,13 @@ int playerMoves = 2;
 boolean wumpusPit = false;
 
 int time;
+int screens = 0;
 
 boolean playerMove;
 
 void setup(){
   board = new Board();
-  size(boardSize, boardSize);
+  size(boardSize*2+10, boardSize+100);
   //timer.start();
   //time = millis();
   playerMove = true;
@@ -57,9 +61,12 @@ void setup(){
   
   player = new Player(0, 7);
   
+  avoidingwumpus = new AvoidingWumpus();
+  randomWumpus = new RandomWumpus();
   astarwumpus = new AStarWumpus();
- // avoidingwumpus = new AvoidingWumpus();
-  //randomWumpus = new RandomWumpus();
+  GUIKB = new Knowledgebase();
+  kbDemo1 = avoidingwumpus.getKB();
+  kbDemo2 = astarwumpus.getKB();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
@@ -97,13 +104,27 @@ void setup(){
 
 
 void draw(){
-  
-  
-  for (x = 0; x < numberOfRectangles; x++){
+ if(screens == 0){
+    openScreen();
+  }
+ else if (screens == 7){
+  goldScreen(); 
+ }
+ else if (screens == 8){
+  deadScreen(); 
+ }
+  else{
+    mainScreen();
+  }
+}
+
+void mainScreen(){
+   for (x = 0; x < numberOfRectangles; x++){
     for (y = 0; y < numberOfRectangles; y++){
       fill(153);
       stroke(0);
       rect(x*rectSize, y*rectSize, rectSize, rectSize);
+       rect(x*rectSize+610, y*rectSize, rectSize, rectSize);
       
       //if(x%2 == 0 && y%2 == 0){
          Tile tile = board.getTile(x, y);
@@ -114,14 +135,57 @@ void draw(){
            SFXgold.play();
            goldFound=true;
          }
+         if(screens == 1 || screens == 2 || screens == 3){
          tile.display(board);
-     // }
+        }
+        
+        Tile tempTile = null;
+         if(screens == 1){
+           textSize(48);
+           text("NO KNOWLEDGEBASE", 665, 300);
+         }
+         textSize(12);
+         if(screens == 2 || screens == 7 || screens == 8) {
+           tempTile = kbDemo1.getTile(x,y);
+         }
+         if(screens == 3) {
+           tempTile = kbDemo2.getTile(x,y);
+         }
+         if(screens == 4 || screens == 5 || screens == 6){
+           tempTile = kbPlay.getTile(x,y);
+         }
+         Tile newTile = new Tile();
+         if(tempTile !=null){
+           newTile.setXGUI(x);
+           newTile.setYGUI(y);
+           newTile.updateXY(tempTile.getXCoordinate(), tempTile.getYCoordinate());
+           newTile.setPit(tempTile.getPit());
+           newTile.setBreeze(tempTile.getBreeze());
+           newTile.setStench(tempTile.getStench());
+           newTile.setGlitter(tempTile.getGlitter());
+           newTile.setGold(tempTile.getGold());
+           GUIKB.addKnowledge(newTile);
+         }
+         
+         Tile kbTile = GUIKB.getTile(x,y);
+         if(kbTile != null){
+           int xG = kbTile.getXCoordinate();
+           int yG = kbTile.getYCoordinate();
+           kbTile.updateXY(xG+610, yG);
+           kbTile.display(board);
+         }
     }
   } 
   player.display();
-  astarwumpus.display();
-  //avoidingwumpus.display();
-  //randomWumpus.display();
+   if(screens == 1){
+    randomWumpus.display();
+  }
+  if(screens == 2){
+    avoidingwumpus.display();
+  }
+  if (screens == 3){
+    astarwumpus.display();
+  }
   
   /*wumpus movement for it's turn*/
   if(/*millis() - time >= 1000 &&*/ playerMove == false){
@@ -149,19 +213,30 @@ void draw(){
     if(playerTurns == playerMoves){
      // avoidingwumpus.makeMove(board, SFXpit);
       astarwumpus.makeMove(board, SFXpit);
-      //randomWumpus.makeMove();
-      //time = millis();
+       if (screens == 1 || screens == 4){
+      randomWumpus.makeMove();
+    }
+    if(screens == 2 || screens == 5){
+      avoidingwumpus.makeMove(board, SFXpit);
+    }
+    if (screens == 3 || screens == 6){
+      astarwumpus.makeMove(board, SFXpit);
+    }
       playerTurns = 0;
       wumpusPit = false;
       
     }
     if(player.getXCoordinate() == 0 && player.getYCoordinate() == 7 && board.getGoldPickedUp()){
       print("YOU ESCAPED THE CAVE WITH THE GOLD!!!");
-      exit();
+      //exit();
+      clear();
+      screens = 7;
     }
     if(board.getTile(player.getXCoordinate(), player.getYCoordinate()).getPit()){
       print("YOU DIED!!!");
-      exit();
+      //exit();
+      clear();
+      screens = 8;
     }
     playerMove = true;
   }
@@ -186,17 +261,85 @@ void draw(){
       }
   }
   */
-  if(astarwumpus.getXCoordinate()==player.getXCoordinate() && astarwumpus.getYCoordinate()==player.getYCoordinate()){
+  if(screens == 1 || screens == 4){
+    if(randomWumpus.getXCoordinate()==player.getXCoordinate() && randomWumpus.getYCoordinate()==player.getYCoordinate()){
     if(!SFXinception.isPlaying())
       SFXinception.rewind();
     SFXinception.play();
   }
+  }
+  if(screens == 2 || screens == 5){
+    if(avoidingwumpus.getXCoordinate()==player.getXCoordinate() && avoidingwumpus.getYCoordinate()==player.getYCoordinate()){
+    if(!SFXinception.isPlaying())
+      SFXinception.rewind();
+    SFXinception.play();
+  }
+  }
+  if(screens == 3 || screens == 6){
+    if(astarwumpus.getXCoordinate()==player.getXCoordinate() && astarwumpus.getYCoordinate()==player.getYCoordinate()){
+    if(!SFXinception.isPlaying())
+      SFXinception.rewind();
+    SFXinception.play();
+  }
+  }
+  
 }
 
-/*void delay(int d){
-  int time = millis();
-  while(millis() - time <= d);
-}*/
+void openScreen(){
+  fill(255);
+  textSize(88);
+  text("WUMPUS WORLD", 250, 100);
+  textSize(50);
+  text("DEMO", 150, 160);
+  rect(75,180,300,100);
+  fill(0);
+  textSize(32);
+  text("RANDOM WUMPUS", 83, 245);
+  
+  fill(255);
+  rect(75,300,300,100);
+  fill(0);
+  textSize(32);
+  text("GREEDY WUMPUS", 94, 360);
+  
+  fill(255);
+  rect(75,420,300,100);
+  fill(0);
+  textSize(32);
+  text("A* WUMPUS", 130, 480);
+  
+  textSize(50);
+  fill(255);
+  text("PLAY", 900, 160);
+  rect(815,180,300,100);
+  fill(0);
+  textSize(32);
+  text("RANDOM WUMPUS", 822, 245);
+  
+  fill(255);
+  rect(815,300,300,100);
+  fill(0);
+  textSize(32);
+  text("GREEDY WUMPUS", 833, 360);
+  
+  fill(255);
+  rect(815,420,300,100);
+  fill(0);
+  textSize(32);
+  text("A* WUMPUS", 878, 480);
+}
+
+void deadScreen(){
+  fill(255);
+  textSize(88);
+  text("YOU DIED", 250, 100);
+}
+
+void goldScreen(){
+  fill(255);
+  textSize(88);
+  text("YOU ESCAPED THE CAVE WITH THE GOLD!!!", 150, 100);
+}
 
 /*move if the player pressed a key. this is when the board updates. */
 void keyPressed(){
@@ -215,20 +358,64 @@ void keyPressed(){
     /** If there is a tile near a pit and the wumpus */
      if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true && board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
         print("There is a stenchy breeze...\n\n\n");  
+        fill(255);
+        text("There is a stenchy breeze...\n\n\n", 100, 640); 
      }
      /** If there is a tile only near a pit */
      else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getBreeze() == true) {
         print("There is a breeze..." + "\n\n\n");  
+        fill(255);
+        text("There is a breeze...", 100, 650);
      }
      /** If there is a tile only near the wumpus */
      else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getStench() == true) {
         print("There is a stench..." + "\n\n\n");  
+        fill(255);
+        text("There is a stench...", 100, 630);
     }
+    else if (board.getTile(player.getXCoordinate(), player.getYCoordinate()).getGlitter() == true) {
+      print("There is glitter..." + "\n\n\n");  
+      fill(255);
+      text("There is glitter...", 100, 670);
+  }
     /** Otherwise, it is a safe tile and should "clear" the console */
     else {
       print("\n\n\n\n\n");  
+      fill(0);
+     rect(95, 610, 200, 400);
     }
       playerMove = false;
   }
 
+}
+
+void mouseClicked(){
+ if(mouseX > 75 && mouseX < 375){
+   if(mouseY > 180 && mouseY < 280){
+     clear();
+     screens = 1;
+   }
+   if(mouseY > 300 && mouseY < 400){
+     clear();
+     screens = 2;
+   }
+   if(mouseY > 420 && mouseY < 520){
+     clear();
+     screens = 3;
+   }
+ }
+ if(mouseX > 815 && mouseX < 1115){
+   if(mouseY > 180 && mouseY < 280){
+     clear();
+     screens = 4;
+   }
+   if(mouseY > 300 && mouseY < 400){
+     clear();
+     screens = 5;
+   }
+   if(mouseY > 420 && mouseY < 520){
+     clear();
+     screens = 6;
+   }  
+ } 
 }
