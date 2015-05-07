@@ -4,6 +4,7 @@ class Board{
   final int boardPix = 600;
   final int rectSize = boardPix/8;
   Tile[][] board = new Tile [size][size];
+  boolean goldPickedUp = false;
   
   public Board(){
     for(int i = 0; i < 8; i++){
@@ -79,5 +80,15 @@ class Board{
      //print(x + ", " + y);
      return board[x][y]; 
    }
+   
+   void setGoldPickedUp(boolean gpu) {
+     goldPickedUp = gpu;
+   }
+   
+   boolean getGoldPickedUp(){
+     return goldPickedUp; 
+   }
+   
+   
    
 }
