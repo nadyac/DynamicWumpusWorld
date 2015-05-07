@@ -1,3 +1,10 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
 class AStarWumpus{
   PImage astar_wumpus = loadImage("smartwumpus.png");
   
@@ -113,7 +120,7 @@ class AStarWumpus{
   }
    
    /*Call necessary functions to get wumpus to move*/
-   void makeMove(Board b){
+   void makeMove(Board b, AudioPlayer SFXpit){
      
      Tile tempTile = b.getTile(xCoordinate, yCoordinate);
      kb.addKnowledge(tempTile);
@@ -166,6 +173,14 @@ class AStarWumpus{
      print("\n" + "best move for A* Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
      print ("**************************************************** \n");
       move(bestMove);
+      
+       if(board.getTile(xCoordinate, yCoordinate).getPit()){
+        if(!SFXpit.isPlaying()) {
+          SFXpit.rewind();
+          SFXpit.play();
+        }
+      }
+      
      }
   
     /*Display the Wumpus on the board*/  

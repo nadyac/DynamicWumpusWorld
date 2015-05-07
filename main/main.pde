@@ -16,7 +16,7 @@ int numberOfRectangles = 8;
 boolean goldFound = false;
 
 Player player;
-AvoidingWumpus avoidingwumpus;
+//AvoidingWumpus avoidingwumpus;
 AStarWumpus astarwumpus;
 //RandomWumpus randomWumpus;
 
@@ -58,7 +58,7 @@ void setup(){
   player = new Player(0, 7);
   
   astarwumpus = new AStarWumpus();
-  avoidingwumpus = new AvoidingWumpus();
+ // avoidingwumpus = new AvoidingWumpus();
   //randomWumpus = new RandomWumpus();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
@@ -120,7 +120,7 @@ void draw(){
   } 
   player.display();
   astarwumpus.display();
-  avoidingwumpus.display();
+  //avoidingwumpus.display();
   //randomWumpus.display();
   
   /*wumpus movement for it's turn*/
@@ -147,8 +147,8 @@ void draw(){
     //print(wumpusPit);
     
     if(playerTurns == playerMoves){
-      avoidingwumpus.makeMove(board, SFXpit);
-      astarwumpus.makeMove(board);
+     // avoidingwumpus.makeMove(board, SFXpit);
+      astarwumpus.makeMove(board, SFXpit);
       //randomWumpus.makeMove();
       //time = millis();
       playerTurns = 0;
@@ -186,7 +186,7 @@ void draw(){
       }
   }
   */
-  if(avoidingwumpus.getXCoordinate()==player.getXCoordinate() && avoidingwumpus.getYCoordinate()==player.getYCoordinate()){
+  if(astarwumpus.getXCoordinate()==player.getXCoordinate() && astarwumpus.getYCoordinate()==player.getYCoordinate()){
     if(!SFXinception.isPlaying())
       SFXinception.rewind();
     SFXinception.play();
