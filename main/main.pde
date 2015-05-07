@@ -242,13 +242,12 @@ void mainScreen(){
     playerMove = true;
   }
   /*wumpus movement for when the player takes too long to move*/
-  /*
-  if(millis() - time >= 5000 && playerMove == true){
-    astarwumpus.makeMove(board);
-    randomWumpus.makeMove();
-    //time = millis();
+  if(millis() - time >= 6000 && playerMove == true){
+    astarwumpus.makeMove(board, SFXpit);
+    randomWumpus.makeMove(SFXpit);
+    time = millis();
   }
-  */
+
   /*
   SFXpit.rewind();
   SFXgold.rewind();
