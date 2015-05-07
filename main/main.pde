@@ -138,7 +138,7 @@ void mainScreen(){
            SFXgold.play();
            goldFound=true;
          }
-         if(screens == 1 || screens == 2 || screens == 3){
+         if(screens == 1 || screens == 2 || screens == 3 || screens == 7){
          tile.display(board);
         }
         
