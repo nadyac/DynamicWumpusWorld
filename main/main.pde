@@ -1,3 +1,13 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
+Minim minim;
+AudioPlayer SFX;
+
 int x;
 int y;
 
@@ -33,6 +43,9 @@ void setup(){
   //timer.start();
   //time = millis();
   playerMove = true;
+  
+  minim = new Minim(this);
+  SFX = minim.loadFile("goldsfx.wav");
   
   player = new Player(0, 7);
   
@@ -85,7 +98,10 @@ void draw(){
       
       //if(x%2 == 0 && y%2 == 0){
          Tile tile = board.getTile(x, y);
-         player.checkForGold(board);
+         boolean goldCheck = player.checkForGold(board);
+         if(goldCheck){
+           SFX.play();
+         }
          tile.display(board);
      // }
     }
@@ -124,6 +140,10 @@ void draw(){
     }
     if(player.getXCoordinate() == 0 && player.getYCoordinate() == 7 && board.getGoldPickedUp()){
       print("YOU ESCAPED THE CAVE WITH THE GOLD!!!");
+      exit();
+    }
+    if(board.getTile(player.getXCoordinate(), player.getYCoordinate()).getPit()){
+      print("YOU DIED!!!");
       exit();
     }
     playerMove = true;
