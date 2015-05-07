@@ -1,5 +1,15 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
 class RandomWumpus{
   PImage randomWumpus = loadImage("randomwumpus.png");
+  
+  Minim minim;
+  AudioPlayer SFXpit;
   
   int xCoordinate;
   int yCoordinate;
@@ -95,6 +105,11 @@ class RandomWumpus{
       
       print("next move: " + nextMove[0] + "," + nextMove[1] + "\n");
       move(nextMove);
+      if(board.getTile(xCoordinate, yCoordinate).getPit()){
+        if(!SFXpit.isPlaying())
+          SFXpit.rewind();
+        SFXpit.play();
+      }
      }
   
     /*Display the Wumpus on the board*/  
