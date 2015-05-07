@@ -67,6 +67,7 @@ void setup(){
   GUIKB = new Knowledgebase();
   kbDemo1 = avoidingwumpus.getKB();
   kbDemo2 = astarwumpus.getKB();
+  kbPlay = player.getKB();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
@@ -214,7 +215,7 @@ void mainScreen(){
      // avoidingwumpus.makeMove(board, SFXpit);
       astarwumpus.makeMove(board, SFXpit);
        if (screens == 1 || screens == 4){
-      randomWumpus.makeMove();
+      randomWumpus.makeMove(SFXpit);
     }
     if(screens == 2 || screens == 5){
       avoidingwumpus.makeMove(board, SFXpit);

@@ -120,7 +120,7 @@ class AvoidingWumpus{
   }
    
    /*Call necessary functions to get wumpus to move*/
-   void makeMove(Board b){
+   void makeMove(Board b, AudioPlayer SFXpit){
      Tile tempTile = b.getTile(xCoordinate, yCoordinate);
      kb.addKnowledge(tempTile);
      kb.updateInference(b);

@@ -90,7 +90,7 @@ class RandomWumpus{
   }
    
    /*Choose a random move from the possible moves*/
-   void makeMove(){
+   void makeMove(AudioPlayer SFXpit){
      
      int[] nextMove = null;
      
