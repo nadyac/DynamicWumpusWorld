@@ -1,5 +1,5 @@
 class GreedyWumpus{
-  PImage GreedyWumpus = loadImage("Wumpus.png");
+  PImage GreedyWumpus = loadImage("wumpus.png");
   
   int xCoordinate;
   int yCoordinate;
@@ -108,7 +108,7 @@ class GreedyWumpus{
   }
    
    /*Call necessary functions to get GreedyWumpus to move*/
-   void makeMove(Board b){
+   void makeMove(Board b, AudioPlayer SFXpit){
      
      float tmpSound = 0;
      float sound = 9;
@@ -127,10 +127,19 @@ class GreedyWumpus{
         if(tmpSound < sound){
           sound = tmpSound;
           bestMove = possibleMove; //current possible move is best so far 
-        } 
+        }
+       
       }
       print("best move: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
+      
+      /* Play falling sound if Wumpus fell into pit*/
+      if(board.getTile(xCoordinate, yCoordinate).getPit()){
+        if(!SFXpit.isPlaying()) {
+          SFXpit.rewind();
+          SFXpit.play();
+        }
+      } 
      }
   
     /*Display the GreedyWumpus on the board*/  

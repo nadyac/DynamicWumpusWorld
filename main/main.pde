@@ -19,6 +19,7 @@ Player player;
 AvoidingWumpus avoidingwumpus;
 RandomWumpus randomWumpus;
 AStarWumpus astarwumpus;
+GreedyWumpus greedywumpus;
 Knowledgebase kbDemo1;
 Knowledgebase kbDemo2;
 Knowledgebase kbPlay;
@@ -64,6 +65,7 @@ void setup(){
   avoidingwumpus = new AvoidingWumpus();
   randomWumpus = new RandomWumpus();
   astarwumpus = new AStarWumpus();
+  greedywumpus = new GreedyWumpus();
   GUIKB = new Knowledgebase();
   kbDemo1 = avoidingwumpus.getKB();
   kbDemo2 = astarwumpus.getKB();
@@ -202,8 +204,7 @@ void mainScreen(){
     }
     //print(wumpusPit);
     if(wumpusPit){
-      playerMoves = 4; 
-      
+      playerMoves = 4;       
     }
     else{
       playerMoves = 2;
@@ -245,6 +246,8 @@ void mainScreen(){
   if(millis() - time >= 6000 && playerMove == true){
     astarwumpus.makeMove(board, SFXpit);
     randomWumpus.makeMove(SFXpit);
+    avoidingwumpus.makeMove(board, SFXpit);
+    greedywumpus.makeMove(board, SFXpit);
     time = millis();
   }
 
