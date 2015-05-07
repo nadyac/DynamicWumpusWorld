@@ -15,7 +15,6 @@ class Tile{
   boolean hasPlayer;
   boolean hasPit = false;
   float safety = 0; 
-  float sound;
   
   void setGold(boolean setGold){
     hasGold = setGold;
@@ -57,10 +56,6 @@ class Tile{
     safety = safetyRanking;
   }
   
-  void setSound(float playerSound) {
-     sound = playerSound; 
-  }
-  
   void updateXY(int x1, int y1){
     xCoordinate = x1;
     yCoordinate = y1;
@@ -83,6 +78,10 @@ class Tile{
     return hasStench; 
   }
   
+  boolean getGlitter() {
+    return hasGlitter; 
+  }
+  
   boolean getGold() {
     return hasGold; 
   }
@@ -99,21 +98,32 @@ class Tile{
      return safety; 
   }
   
-  float getSound() {
-     return sound; 
+  int getXCoordinate() {
+      return xCoordinate;
   }
   
-  void display(Board board){
+  int getYCoordinate() {
+     return yCoordinate; 
+  }
+  
+  void display(){
     if(hasPit == true){
-      fill(0);
+      fill(0, 50);
       ellipseMode(CENTER);
       ellipse(xCoordinate, yCoordinate, 50, 50);
     }
     //the 25 was trial and error!
-
-    if(hasGold == true && !board.getGoldPickedUp()){
+    if(hasGold == true){
       image(gold, xCoordinate-25, yCoordinate-25, 50, 50);
     } 
+    if(hasGlitter == true){
+      fill(0);
+      text("G", xCoordinate-25, yCoordinate-25);
+    }
+    if(hasBreeze == true){
+      fill(0);
+      text("B", xCoordinate-35, yCoordinate-25);
+    }
   }
   
 }
