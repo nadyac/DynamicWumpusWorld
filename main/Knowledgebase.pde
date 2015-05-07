@@ -16,7 +16,7 @@ class Knowledgebase{
     Tile tempTile = tile;
    int x =  tempTile.getXGUI();
    int y =  tempTile.getYGUI();
-      //print("x2: " + x + " y2: " + y);
+      print("x2: " + x + " y2: " + y);
     KB[x][y] = tempTile; 
   }
   
@@ -50,7 +50,7 @@ class Knowledgebase{
                           print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                          //we've fallen into a pit going to the left. This means we won't fall into this one again.
                          if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
-                            KB[xCoordinate-1][yCoordinate].setSafety(1);
+                            KB[xCoordinate-1][yCoordinate].setSafety(1.4);
                          }
                          //no pit going left! we'll remember that
                          else {
@@ -62,7 +62,7 @@ class Knowledgebase{
                           print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                          //we've fallen into a pit going up. This means we won't fall into this again.
                          if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
-                            KB[xCoordinate][yCoordinate-1].setSafety(1);
+                            KB[xCoordinate][yCoordinate-1].setSafety(1.4);
                          }
                          //no pit going up! we'll remember that
                          else {
@@ -87,7 +87,7 @@ class Knowledgebase{
                       print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                       // if it is a pit, then we add that to our knowledge base
                      if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
-                        KB[xCoordinate-1][yCoordinate].setSafety(2);
+                        KB[xCoordinate-1][yCoordinate].setSafety(1.4);
                      }
                      // if it isn't, then we can safely go in that tile
                      else {
@@ -99,7 +99,7 @@ class Knowledgebase{
                        print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                        // If it is a pit, then we add that to our knowledge base 
                        if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
-                          KB[xCoordinate][yCoordinate-1].setSafety(1);
+                          KB[xCoordinate][yCoordinate-1].setSafety(1.4);
                        }
                        // if it isn't, then we can safely go in that tile 
                        else {
@@ -128,7 +128,7 @@ class Knowledgebase{
                              print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
                              print("shouldn't know this either");
                              if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
-                                KB[xCoordinate+1][yCoordinate].setSafety(1);
+                                KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                              }
                              else {
                                 KB[xCoordinate+1][yCoordinate].setSafety(0); 
@@ -137,7 +137,7 @@ class Knowledgebase{
                          if(KB[xCoordinate][yCoordinate-1] != null){
                             print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                              if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
-                                KB[xCoordinate][yCoordinate-1].setSafety(1);
+                                KB[xCoordinate][yCoordinate-1].setSafety(1.4);
                              }
                              else {
                                 KB[xCoordinate][yCoordinate-1].setSafety(0); 
@@ -158,7 +158,7 @@ class Knowledgebase{
                       if (KB[xCoordinate+1][yCoordinate] != null) {
                            print("I've been to: " + xCoordinate+1 + " " + yCoordinate + "\n");
                              if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
-                                KB[xCoordinate+1][yCoordinate].setSafety(1);
+                                KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                              }
                              else {
                                 KB[xCoordinate+1][yCoordinate].setSafety(0); 
@@ -167,7 +167,7 @@ class Knowledgebase{
                      if(KB[xCoordinate][yCoordinate-1] != null){
                         print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                          if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
-                            KB[xCoordinate][yCoordinate-1].setSafety(1);
+                            KB[xCoordinate][yCoordinate-1].setSafety(1.4);
                          }
                          else {
                             KB[xCoordinate][yCoordinate-1].setSafety(0); 
@@ -198,7 +198,7 @@ class Knowledgebase{
                          if (KB[xCoordinate-1][yCoordinate] != null) {
                             print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                              if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
-                                KB[xCoordinate-1][yCoordinate].setSafety(1);
+                                KB[xCoordinate-1][yCoordinate].setSafety(1.4);
                              }
                              else {
                                 KB[xCoordinate-1][yCoordinate].setSafety(0); 
@@ -207,7 +207,7 @@ class Knowledgebase{
                          if(KB[xCoordinate][yCoordinate+1] != null){
                               print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                              if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
-                                KB[xCoordinate][yCoordinate+1].setSafety(1);
+                                KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                              }
                              else {
                                 KB[xCoordinate][yCoordinate+1].setSafety(0); 
@@ -227,7 +227,7 @@ class Knowledgebase{
                      if (KB[xCoordinate-1][yCoordinate] != null) {
                           print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                          if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
-                            KB[xCoordinate-1][yCoordinate].setSafety(1);
+                            KB[xCoordinate-1][yCoordinate].setSafety(1.4);
                          }
                          else {
                             KB[xCoordinate-1][yCoordinate].setSafety(0); 
@@ -236,7 +236,7 @@ class Knowledgebase{
                      if (KB[xCoordinate][yCoordinate+1] != null){
                           print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                          if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
-                            KB[xCoordinate][yCoordinate+1].setSafety(1);
+                            KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                          }
                          else {
                             KB[xCoordinate][yCoordinate+1].setSafety(0); 
@@ -259,7 +259,7 @@ class Knowledgebase{
                        if (KB[xCoordinate+1][yCoordinate] != null) {
                             print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
                            if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
-                              KB[xCoordinate+1][yCoordinate].setSafety(1);
+                              KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                            }
                            else {
                               KB[xCoordinate+1][yCoordinate].setSafety(0); 
@@ -268,7 +268,7 @@ class Knowledgebase{
                        if (KB[xCoordinate][yCoordinate+1] != null){
                             print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                            if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
-                              KB[xCoordinate][yCoordinate+1].setSafety(1);
+                              KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                            }
                            else {
                               KB[xCoordinate][yCoordinate+1].setSafety(0); 
@@ -289,7 +289,7 @@ class Knowledgebase{
                   if (KB[xCoordinate+1][yCoordinate] != null) {
                        print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
                            if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
-                              KB[xCoordinate+1][yCoordinate].setSafety(1);
+                              KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                            }
                            else {
                               KB[xCoordinate+1][yCoordinate].setSafety(0); 
@@ -298,7 +298,7 @@ class Knowledgebase{
                        if (KB[xCoordinate][yCoordinate+1] != null){
                             print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                            if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
-                              KB[xCoordinate][yCoordinate+1].setSafety(1);
+                              KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                            }
                            else {
                               KB[xCoordinate][yCoordinate+1].setSafety(0); 
@@ -314,11 +314,11 @@ class Knowledgebase{
     
     /** If there was no breeze, then we see if there was a pit */
     if (KB[xCoordinate][yCoordinate].getPit() == true) {
-      KB[xCoordinate][yCoordinate].setSafety(1);  
+      KB[xCoordinate][yCoordinate].setSafety(1.4);  
     }
     /** Otherwise, we say that the safety is uncertain */
     else {
-      KB[xCoordinate][yCoordinate].setSafety(0);  
+      KB[xCoordinate][yCoordinate].setSafety(1.4);  
     }
   }
   

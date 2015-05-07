@@ -1,5 +1,15 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
 class AvoidingWumpus{
   PImage wumpus = loadImage("wumpus.png");
+  
+  Minim minim;
+  AudioPlayer SFXpit;
   
   int xCoordinate;
   int yCoordinate;
@@ -144,6 +154,11 @@ class AvoidingWumpus{
       
      print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
+      if(board.getTile(xCoordinate, yCoordinate).getPit()){
+        if(!SFXpit.isPlaying())
+          SFXpit.rewind();
+        SFXpit.play();
+      }
      }
   
     /*Display the Wumpus on the board*/  

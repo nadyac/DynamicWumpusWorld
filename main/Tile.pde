@@ -106,7 +106,7 @@ class Tile{
      return yCoordinate; 
   }
   
-  void display(){
+  void display(Board b){
     if(hasPit == true){
       fill(0, 50);
       ellipseMode(CENTER);
@@ -124,6 +124,10 @@ class Tile{
       fill(0);
       text("B", xCoordinate-35, yCoordinate-25);
     }
+    if(hasGold == true && !b.getGoldPickedUp()){
+      image(gold, xCoordinate-25, yCoordinate-25, 50, 50);
+    } 
+    
   }
   
 }
