@@ -15,6 +15,7 @@ int numberOfRectangles = 8;
 
 Player player;
 AvoidingWumpus avoidingwumpus;
+AStarWumpus astarwumpus;
 //RandomWumpus randomWumpus;
 
 Board board;
@@ -49,7 +50,8 @@ void setup(){
   
   player = new Player(0, 7);
   
-  avoidingwumpus = new AvoidingWumpus();
+  astarwumpus = new AStarWumpus();
+  //avoidingwumpus = new AvoidingWumpus();
   //randomWumpus = new RandomWumpus();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
@@ -60,8 +62,8 @@ void setup(){
   
   Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   playerTile.setPlayer(true);
-  int x = avoidingwumpus.getXCoordinate();
-  int y = avoidingwumpus.getYCoordinate();
+  int x = astarwumpus.getXCoordinate();
+  int y = astarwumpus.getYCoordinate();
   Tile wumpusTile = board.getTile(x, y);
   wumpusTile.setWumpus(true);
   /** Setting all the tiles around the wumpus that have stench - this probably should be done in board, but wumpus is initiated here, so I kept it as is.
@@ -107,14 +109,14 @@ void draw(){
     }
   } 
   player.display();
-  avoidingwumpus.display();
+  astarwumpus.display();
   //randomWumpus.display();
   
   /*wumpus movement for it's turn*/
   if(/*millis() - time >= 1000 &&*/ playerMove == false){
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
-        if(board.getTile(avoidingwumpus.getXCoordinate(), avoidingwumpus.getYCoordinate()).getPit()){
+        if(board.getTile(astarwumpus.getXCoordinate(), astarwumpus.getYCoordinate()).getPit()){
           wumpusPit = true;
         }
       }
@@ -131,7 +133,7 @@ void draw(){
     //print(wumpusPit);
     
     if(playerTurns == playerMoves){
-      avoidingwumpus.makeMove(board);
+      astarwumpus.makeMove(board);
       //randomWumpus.makeMove();
       //time = millis();
       playerTurns = 0;
@@ -151,7 +153,7 @@ void draw(){
   /*wumpus movement for when the player takes too long to move*/
   /*
   if(millis() - time >= 5000 && playerMove == true){
-    avoidingwumpus.makeMove(board);
+    astarwumpus.makeMove(board);
     randomWumpus.makeMove();
     //time = millis();
   }
