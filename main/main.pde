@@ -58,7 +58,7 @@ void setup(){
   player = new Player(0, 7);
   
   astarwumpus = new AStarWumpus();
-  //avoidingwumpus = new AvoidingWumpus();
+  avoidingwumpus = new AvoidingWumpus();
   //randomWumpus = new RandomWumpus();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
@@ -120,6 +120,7 @@ void draw(){
   } 
   player.display();
   astarwumpus.display();
+  avoidingwumpus.display();
   //randomWumpus.display();
   
   /*wumpus movement for it's turn*/
