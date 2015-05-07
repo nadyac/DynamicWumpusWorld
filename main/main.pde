@@ -6,6 +6,7 @@ int numberOfRectangles = 8;
 Player player;
 AvoidingWumpus avoidingwumpus;
 RandomWumpus randomWumpus;
+AStarWumpus astarwumpus;
 Knowledgebase kbDemo1;
 Knowledgebase kbDemo2;
 Knowledgebase kbPlay;
@@ -34,10 +35,10 @@ void setup(){
   
   avoidingwumpus = new AvoidingWumpus();
   randomWumpus = new RandomWumpus();
-  
+  astarwumpus = new AStarWumpus();
   GUIKB = new Knowledgebase();
   kbDemo1 = avoidingwumpus.getKB();
-  //kbDemo2 = astarwumpus.getKB();
+  kbDemo2 = astarwumpus.getKB();
   
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
@@ -143,7 +144,7 @@ void mainScreen(){
     avoidingwumpus.display();
   }
   if (screens == 3 || screens == 7){
-    //astarwumpus.display();
+    astarwumpus.display();
   }
   
   /*wumpus movement for it's turn*/
@@ -155,7 +156,7 @@ void mainScreen(){
       avoidingwumpus.makeMove(board);
     }
     if (screens == 3 || screens == 6 || screens == 7 || screens == 8){
-      
+      astarwumpus.makeMove(board);
     }
     time = millis();
     playerMove = true;
@@ -266,7 +267,7 @@ void keyPressed(){
   else {
     print("\n\n\n\n\n"); 
    fill(0);
-   rect(95, 640, 200, 400);
+   rect(95, 610, 200, 400);
   }
     playerMove = false;
   }
