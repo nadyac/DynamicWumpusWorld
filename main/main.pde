@@ -42,6 +42,7 @@ boolean wumpusPit = false;
 
 int time;
 int screens = 0;
+String deathOutput = "";
 
 boolean playerMove;
 
@@ -251,6 +252,7 @@ void mainScreen(){
       screens = 9;
     }
     if(board.getTile(player.getXCoordinate(), player.getYCoordinate()).getPit()){
+      deathOutput = "You fell in a pit";
       print("YOU DIED!!!");
       //exit();
       clear();
@@ -282,24 +284,28 @@ void mainScreen(){
   */
   if(screens == 1 || screens == 4){
     if(randomWumpus.getXCoordinate()==player.getXCoordinate() && randomWumpus.getYCoordinate()==player.getYCoordinate()){
+      deathOutput = "The wumpus found you";
     clear();
       screens = 10;
   }
   }
   if(screens == 2 || screens == 5){
     if(avoidingwumpus.getXCoordinate()==player.getXCoordinate() && avoidingwumpus.getYCoordinate()==player.getYCoordinate()){
+       deathOutput = "The wumpus found you";
     clear();
       screens = 10;
   }
   }
   if(screens == 3 || screens == 6){
     if(astarwumpus.getXCoordinate()==player.getXCoordinate() && astarwumpus.getYCoordinate()==player.getYCoordinate()){
+       deathOutput = "The wumpus found you";
       clear();
       screens = 10;
   }
   }
   if(screens == 7 || screens == 8){
     if(greedywumpus.getXCoordinate()==player.getXCoordinate() && greedywumpus.getYCoordinate()==player.getYCoordinate()){
+       deathOutput = "The wumpus found you";
       clear();
       screens = 10;
   }
@@ -334,7 +340,7 @@ void openScreen(){
   rect(75,540,300,100);
   fill(0);
   textSize(32);
-  text("AVOIDING WUMPUS", 76, 600);
+  text("INFERENCE WUMPUS", 75, 600);
   
   textSize(50);
   fill(255);
@@ -360,7 +366,7 @@ void openScreen(){
   rect(815,540,300,100);
   fill(0);
   textSize(32);
-  text("AVOIDING WUMPUS", 816, 600);
+  text("INFERENCE WUMPUS", 815, 600);
 }
 
 void deadScreen(){
@@ -368,6 +374,7 @@ void deadScreen(){
   fill(255);
   textSize(88);
   text("YOU DIED", 390, 100);
+  text(deathOutput, 100, 200);
   if(!SFXinception.isPlaying()){
       SFXinception.rewind();}
     SFXinception.play();
