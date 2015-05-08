@@ -110,10 +110,10 @@ void draw(){
  if(screens == 0){
     openScreen();
   }
- else if (screens == 7){
+ else if (screens == 9){
   goldScreen(); 
  }
- else if (screens == 8){
+ else if (screens == 10){
   deadScreen(); 
  }
   else{
@@ -138,7 +138,7 @@ void mainScreen(){
            SFXgold.play();
            goldFound=true;
          }
-         if(screens == 1 || screens == 2 || screens == 3){
+         if(screens == 1 || screens == 2 || screens == 3 || screens == 7){
          tile.display(board);
         }
         
@@ -147,8 +147,12 @@ void mainScreen(){
            textSize(48);
            text("NO KNOWLEDGEBASE", 665, 300);
          }
+         if(screens == 7){
+           textSize(48);
+           text("NO KNOWLEDGEBASE", 665, 300);
+         }
          textSize(12);
-         if(screens == 2 || screens == 7 || screens == 8) {
+         if(screens == 2) {
            tempTile = kbDemo1.getTile(x,y);
          }
          if(screens == 3) {
@@ -188,6 +192,9 @@ void mainScreen(){
   }
   if (screens == 3){
     astarwumpus.display();
+  }
+  if (screens == 7){
+   greedywumpus.display();
   }
   
   /*wumpus movement for it's turn*/
@@ -232,13 +239,13 @@ void mainScreen(){
       print("YOU ESCAPED THE CAVE WITH THE GOLD!!!");
       //exit();
       clear();
-      screens = 7;
+      screens = 9;
     }
     if(board.getTile(player.getXCoordinate(), player.getYCoordinate()).getPit()){
       print("YOU DIED!!!");
       //exit();
       clear();
-      screens = 8;
+      screens = 10;
     }
     playerMove = true;
   }
@@ -311,6 +318,12 @@ void openScreen(){
   textSize(32);
   text("A* WUMPUS", 130, 480);
   
+  fill(255);
+  rect(75,540,300,100);
+  fill(0);
+  textSize(32);
+  text("AVOIDING WUMPUS", 76, 600);
+  
   textSize(50);
   fill(255);
   text("PLAY", 900, 160);
@@ -330,6 +343,12 @@ void openScreen(){
   fill(0);
   textSize(32);
   text("A* WUMPUS", 878, 480);
+  
+  fill(255);
+  rect(815,540,300,100);
+  fill(0);
+  textSize(32);
+  text("AVOIDING WUMPUS", 816, 600);
 }
 
 void deadScreen(){
@@ -404,11 +423,15 @@ void mouseClicked(){
    }
    if(mouseY > 300 && mouseY < 400){
      clear();
-     screens = 2;
+     screens = 7;
    }
    if(mouseY > 420 && mouseY < 520){
      clear();
      screens = 3;
+   }
+   if(mouseY > 540 && mouseY < 640){
+     clear();
+     screens = 2;
    }
  }
  if(mouseX > 815 && mouseX < 1115){
@@ -418,11 +441,15 @@ void mouseClicked(){
    }
    if(mouseY > 300 && mouseY < 400){
      clear();
-     screens = 5;
+     screens = 8;
    }
    if(mouseY > 420 && mouseY < 520){
      clear();
      screens = 6;
    }  
+    if(mouseY > 540 && mouseY < 640){
+     clear();
+     screens = 5;
+   }
  } 
 }
