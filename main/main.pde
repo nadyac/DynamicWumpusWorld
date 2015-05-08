@@ -41,7 +41,7 @@ int playerMoves = 2;
 boolean wumpusPit = false;
 
 int time;
-int screens = 9;
+int screens = 0;
 
 boolean playerMove;
 
