@@ -40,26 +40,29 @@ int playerMoves = 2;
 //is Wumpus in a pit?
 boolean wumpusPit = false;
 
-int time;
-int screens = 0;
-String deathOutput = "";
+int time; // used for the wumpus movement timer
+int screens = 0; // controls what screen the player sees and interacts with
+String deathOutput = ""; //when the player dies this variable tells the player why the died
 
 boolean playerMove;
 
+/**
+* setup() - function that sets up the intitial game. Processing calls this function once at the beginning of the game.
+* Loads assets and instantiates variables.
+*/
 void setup(){
   board = new Board();
   size(boardSize*2+10, boardSize+100);
-  //timer.start();
-  //time = millis();
+  
   playerMove = true;
   
   minim = new Minim(this);
   SFXgold = minim.loadFile("goldsfx.wav");
-  //SFXgold.loop();
+  
   SFXpit = minim.loadFile("pitsfx.wav");
-  //SFXpit.loop();
+  
   SFXinception = minim.loadFile("inception.mp3");
-  //SFXinception.loop();
+  
   
   player = new Player(0, 7);
   
@@ -106,7 +109,10 @@ void setup(){
   smooth();
 }
 
-
+/**
+* draw - main function that runs the program. Processing continuously calls this function to refresh the canvas
+* calls the various game
+*/
 void draw(){
  if(screens == 0){
     openScreen();
@@ -122,15 +128,19 @@ void draw(){
   }
 }
 
+/**
+* mainScreen - function that runs the game. Is called continuously by draw when in demo or play mode.
+*/
 void mainScreen(){
+  /**Drawing the playing board */ 
    for (x = 0; x < numberOfRectangles; x++){
     for (y = 0; y < numberOfRectangles; y++){
       fill(153);
       stroke(0);
       rect(x*rectSize, y*rectSize, rectSize, rectSize);
-       rect(x*rectSize+610, y*rectSize, rectSize, rectSize);
+      rect(x*rectSize+610, y*rectSize, rectSize, rectSize);
       
-      //if(x%2 == 0 && y%2 == 0){
+      /** Displaying the tiles on the board */ 
          Tile tile = board.getTile(x, y);
          boolean goldCheck = player.checkForGold(board);
          if(goldCheck && !goldFound){
@@ -143,8 +153,10 @@ void mainScreen(){
          tile.display(board);
         }
         
+        /**Displaying the wumpuses' or players knowledge base depending on when mode the player selects. */
         Tile tempTile = null;
          if(screens == 1){
+           fill(0);
            textSize(48);
            text("NO KNOWLEDGEBASE", 665, 300);
          }
@@ -153,6 +165,7 @@ void mainScreen(){
            text("NO KNOWLEDGEBASE", 665, 300);
          }
          textSize(12);
+         /** Gets the appropriate knoweledge base to display */
          if(screens == 2) {
            tempTile = kbDemo1.getTile(x,y);
          }
@@ -162,6 +175,7 @@ void mainScreen(){
          if(screens == 4 || screens == 5 || screens == 6){
            tempTile = kbPlay.getTile(x,y);
          }
+         /**Copies the knoweledge base in order to be correctly displayed. */
          Tile newTile = new Tile();
          if(tempTile !=null){
            newTile.setXGUI(x);
@@ -184,8 +198,12 @@ void mainScreen(){
          }
     }
   } 
+  
+  /**Displaying the player */ 
   player.display();
-   if(screens == 1){
+  
+  /**Displaying the different wumpuses based on the users selection */ 
+  if(screens == 1){
     randomWumpus.display();
   }
   if(screens == 2){
@@ -216,7 +234,7 @@ void mainScreen(){
         }
       }
     }
-    //print(wumpusPit);
+    /**Penalty for the wumpus falling into puts. */
     if(wumpusPit){
       playerMoves = 4;       
     }
@@ -224,33 +242,32 @@ void mainScreen(){
       playerMoves = 2;
     }
     
-    //print(wumpusPit);
-    
+    /**Turn based movement for when the player does move */
     if(playerTurns == playerMoves){
-     // avoidingwumpus.makeMove(board, SFXpit);
-     // astarwumpus.makeMove(board, SFXpit);
        if (screens == 1 || screens == 4){
-      randomWumpus.makeMove(SFXpit);
-    }
-    if(screens == 2 || screens == 5){
-      avoidingwumpus.makeMove(board, SFXpit);
-    }
-    if (screens == 3 || screens == 6){
-      astarwumpus.makeMove(board, SFXpit);
-    }
-    if (screens == 7 || screens == 8){
-      greedywumpus.makeMove(board, SFXpit);
-    }
+        randomWumpus.makeMove(SFXpit);
+      }
+      if(screens == 2 || screens == 5){
+        avoidingwumpus.makeMove(board, SFXpit);
+      }
+      if (screens == 3 || screens == 6){
+        astarwumpus.makeMove(board, SFXpit);
+      }
+      if (screens == 7 || screens == 8){
+        greedywumpus.makeMove(board, SFXpit);
+      }
       playerTurns = 0;
       wumpusPit = false;
       
     }
+    /**Check if the player has the gold and has returned to the start position to win the game */
     if(player.getXCoordinate() == 0 && player.getYCoordinate() == 7 && board.getGoldPickedUp()){
       print("YOU ESCAPED THE CAVE WITH THE GOLD!!!");
       //exit();
       clear();
       screens = 9;
     }
+    /**Checks if the player has fallen in a pit */
     if(board.getTile(player.getXCoordinate(), player.getYCoordinate()).getPit()){
       deathOutput = "You fell in a pit";
       print("YOU DIED!!!");
@@ -269,73 +286,70 @@ void mainScreen(){
     time = millis();
   }
 
-  /*
-  SFXpit.rewind();
-  SFXgold.rewind();
-  */
-  /*
-  for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        if(board.getTile(i, j).getWumpus() && board.getTile(i, j).getPlayer()){
-          SFXinception.play();
-        }
-      }
-  }
-  */
+  /** The following if statements check to see if the player and the wumpus are on the same tile. If they are it ends the game and brings up the death screen*/
   if(screens == 1 || screens == 4){
     if(randomWumpus.getXCoordinate()==player.getXCoordinate() && randomWumpus.getYCoordinate()==player.getYCoordinate()){
       deathOutput = "The wumpus found you";
-    clear();
+      clear();
       screens = 10;
-  }
+    }
   }
   if(screens == 2 || screens == 5){
     if(avoidingwumpus.getXCoordinate()==player.getXCoordinate() && avoidingwumpus.getYCoordinate()==player.getYCoordinate()){
        deathOutput = "The wumpus found you";
-    clear();
+      clear();
       screens = 10;
-  }
+    }
   }
   if(screens == 3 || screens == 6){
     if(astarwumpus.getXCoordinate()==player.getXCoordinate() && astarwumpus.getYCoordinate()==player.getYCoordinate()){
-       deathOutput = "The wumpus found you";
+      deathOutput = "The wumpus found you";
       clear();
       screens = 10;
-  }
+    }
   }
   if(screens == 7 || screens == 8){
     if(greedywumpus.getXCoordinate()==player.getXCoordinate() && greedywumpus.getYCoordinate()==player.getYCoordinate()){
        deathOutput = "The wumpus found you";
       clear();
       screens = 10;
-  }
+    }
   }
   
 }
 
+/**
+* openScreen - function that runs the opening screen of the game. Displays the buttons for choosing what type of wumpus to use.
+*/
 void openScreen(){
   fill(255);
   textSize(88);
   text("WUMPUS WORLD", 250, 100);
+ 
   textSize(50);
   text("DEMO", 150, 160);
+  
+  /** Sets up the graphics that represent a button on the screen */
   rect(75,180,300,100);
   fill(0);
   textSize(32);
   text("RANDOM WUMPUS", 83, 245);
   
+   /** Sets up the graphics that represent a button on the screen */
   fill(255);
   rect(75,300,300,100);
   fill(0);
   textSize(32);
   text("GREEDY WUMPUS", 94, 360);
   
+   /** Sets up the graphics that represent a button on the screen */
   fill(255);
   rect(75,420,300,100);
   fill(0);
   textSize(32);
   text("A* WUMPUS", 130, 480);
   
+   /** Sets up the graphics that represent a button on the screen */
   fill(255);
   rect(75,540,300,100);
   fill(0);
@@ -345,23 +359,28 @@ void openScreen(){
   textSize(50);
   fill(255);
   text("PLAY", 900, 160);
+  
+   /** Sets up the graphics that represent a button on the screen */
   rect(815,180,300,100);
   fill(0);
   textSize(32);
   text("RANDOM WUMPUS", 822, 245);
   
+   /** Sets up the graphics that represent a button on the screen */
   fill(255);
   rect(815,300,300,100);
   fill(0);
   textSize(32);
   text("GREEDY WUMPUS", 833, 360);
   
+   /** Sets up the graphics that represent a button on the screen */
   fill(255);
   rect(815,420,300,100);
   fill(0);
   textSize(32);
   text("A* WUMPUS", 878, 480);
   
+   /** Sets up the graphics that represent a button on the screen */
   fill(255);
   rect(815,540,300,100);
   fill(0);
@@ -369,6 +388,9 @@ void openScreen(){
   text("INFERENCE WUMPUS", 815, 600);
 }
 
+/**
+* mainScreen - function that runs the screen the player sees when they lose the game
+*/
 void deadScreen(){
   background(0);
   fill(255);
@@ -381,13 +403,18 @@ void deadScreen(){
   
 }
 
+/**
+* goldScreen - function that runs the screen the player sees when they win the game
+*/
 void goldScreen(){
   fill(255);
   textSize(40);
   text("YOU ESCAPED THE CAVE WITH THE GOLD!!!", 50, 100);
 }
 
-/*move if the player pressed a key. this is when the board updates. */
+/**
+* keyPressed - function that controls the players movements. When the arrow keys are pressed the player moves.
+*/
 void keyPressed(){
   if(playerMove == true){
     time = millis();
@@ -436,22 +463,28 @@ void keyPressed(){
 
 }
 
+/**
+* mouseClicked - function that allows the player to click on the screen to select what wumpus to use.
+*/
 void mouseClicked(){
   if(screens == 0){
- if(mouseX > 75 && mouseX < 375){
-   if(mouseY > 180 && mouseY < 280){
-     clear();
-     screens = 1;
-   }
-   if(mouseY > 300 && mouseY < 400){
-     clear();
-     screens = 7;
-   }
-   if(mouseY > 420 && mouseY < 520){
+    /** mouseX and mouseY represent the coordinates of the mouse on the canvas.
+    * The if statements below show which areas of the canvas are "clickable".
+    */
+    if(mouseX > 75 && mouseX < 375){
+      if(mouseY > 180 && mouseY < 280){
+        clear();
+        screens = 1;
+      }
+    if(mouseY > 300 && mouseY < 400){
+       clear();
+       screens = 7;
+    }
+    if(mouseY > 420 && mouseY < 520){
      clear();
      screens = 3;
-   }
-   if(mouseY > 540 && mouseY < 640){
+    }
+    if(mouseY > 540 && mouseY < 640){
      clear();
      screens = 2;
    }
