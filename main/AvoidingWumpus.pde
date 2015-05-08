@@ -155,10 +155,12 @@ class AvoidingWumpus{
      //print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
       if(board.getTile(xCoordinate, yCoordinate).getPit()){
-        if(!SFXpit.isPlaying())
-          SFXpit.rewind();
-        SFXpit.play();
+          if(!SFXpit.isPlaying()) {
+            SFXpit.rewind();
+            SFXpit.play();
+          }
       }
+     
      }
   
     /*Display the Wumpus on the board*/  

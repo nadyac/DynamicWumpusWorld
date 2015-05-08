@@ -20,92 +20,67 @@ AvoidingWumpus avoidingwumpus;
 RandomWumpus randomWumpus;
 AStarWumpus astarwumpus;
 GreedyWumpus greedywumpus;
+/** Knowledge base for AvoidingWumpus*/
 Knowledgebase kbDemo1;
+/** Knowledge base for AStarWumpus*/
 Knowledgebase kbDemo2;
+/** Knowledge base for the player - adds tiles the player has been to */
 Knowledgebase kbPlay;
 
 Board board;
+/** Knowledge base GUIKB - acts as a copy for the knowledge base */
 Knowledgebase GUIKB;
 
 int boardSize = 600;
 int rectSize = boardSize/8;
 
-//the # of turns the player has taken before the Wumpus moves
+/** the # of turns the player has taken before the Wumpus moves */
 int playerTurns;
-//2 if wumpus is not in a pit, 4 if wumpus is in a pit
+/** 2 if wumpus is not in a pit, 4 if wumpus is in a pit */
 int playerMoves = 2;
-
-//# of turns the wumpus has been under penalty
-//int wumpusPenaltyTurns = 0;
-//is Wumpus in a pit?
+/**is Wumpus in a pit? */
 boolean wumpusPit = false;
 
-int time; // used for the wumpus movement timer
-int screens = 0; // controls what screen the player sees and interacts with
-String deathOutput = ""; //when the player dies this variable tells the player why the died
+int time;
+int screens = 0;
+String deathOutput = "";
 
 boolean playerMove;
 
-/**
-* setup() - function that sets up the intitial game. Processing calls this function once at the beginning of the game.
-* Loads assets and instantiates variables.
-*/
 void setup(){
   board = new Board();
   size(boardSize*2+10, boardSize+100);
-  
   playerMove = true;
-  
+  /** minim - object needed to load and play audio files*/
   minim = new Minim(this);
+  /** sound effect files */
   SFXgold = minim.loadFile("goldsfx.wav");
-  
   SFXpit = minim.loadFile("pitsfx.wav");
-  
   SFXinception = minim.loadFile("inception.mp3");
-  
-  
+  /** Player spawns at (0,7) */
   player = new Player(0, 7);
-  
+  /** Declaration of the wumpuses */
   avoidingwumpus = new AvoidingWumpus();
   randomWumpus = new RandomWumpus();
   astarwumpus = new AStarWumpus();
   greedywumpus = new GreedyWumpus();
   GUIKB = new Knowledgebase();
+  /** Declaration of knowledge bases */
   kbDemo1 = avoidingwumpus.getKB();
   kbDemo2 = astarwumpus.getKB();
   kbPlay = player.getKB();
-  
+  /** Sets the Tile that contains the player (now that Tile knows it contains the player) */
   Tile tile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
   tile.setPlayer(true);
-  
+  /** Sets all the pits on the board (10 random pits) */
   board.setPits();
+  /** Sets the gold on the board (one random tile) */
   board.setGold();
   
-  Tile playerTile = board.getTile(player.getXCoordinate(), player.getYCoordinate());
-  playerTile.setPlayer(true);
-  int x = astarwumpus.getXCoordinate();
-  int y = astarwumpus.getYCoordinate();
-  Tile wumpusTile = board.getTile(x, y);
-  wumpusTile.setWumpus(true);
-  /** Setting all the tiles around the wumpus that have stench - this probably should be done in board, but wumpus is initiated here, so I kept it as is.
-    * Feel free to change as you see fit!
-    */
-   if (y < 7) {
-      Tile wt1 = board.getTile(x, y+1);
-      wt1.setStench(true); 
-   }
-   if (y > 0) {
-      Tile wt2 = board.getTile(x, y-1);
-      wt2.setStench(true);
-   }
-   if (x < 7) {
-      Tile wt3 = board.getTile(x+1, y);
-      wt3.setStench(true);
-   }
-   if (x > 0) {
-      Tile wt4 = board.getTile(x-1, y);
-      wt4.setStench(true);
-   }
+  //int x1 = avoidingwumpus.getXCoordinate();
+  //int y1 = avoidingwumpus.getYCoordinate();
+  //Tile wumpusTile = board.getTile(x1, y1);
+  //wumpusTile.setWumpus(true);
   smooth();
 }
 
