@@ -79,7 +79,7 @@ class Board{
        gold1 = int(x);
        gold2 = int(y);
        tileToSet = board[gold1][gold2];
-     } while(tileToSet.getPit() == true || tileToSet.getWumpus());
+     } while(tileToSet.getPit() || tileToSet.getWumpus() || (gold1==0 && gold2==7));
      tileToSet.setGold(true);
      /** If statements necessary to set glitter of Tiles adjacent to gold */
         if (gold2 < 7) {
