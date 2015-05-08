@@ -75,9 +75,9 @@ class GreedyWumpus{
          possibleMoves.add(move3);
       } 
        //print the possible moves (remove this later)
-       print("possible GreedyWumpus moves: \n");
+       //print("possible GreedyWumpus moves: \n");
        for(int[] moves: possibleMoves){
-         print(moves[0]+ "," + moves[1] + "\n");
+         //print(moves[0]+ "," + moves[1] + "\n");
        }
        return possibleMoves;
   }
@@ -91,7 +91,7 @@ class GreedyWumpus{
        for(int j = 0; j < 8; j++){
          if (b.getTile(i,j).hasPlayer == true){
              int[] playerCoordinates = {i, j};
-             print("player coordinates: " + playerCoordinates[0] + "," + playerCoordinates[1] + "\n");
+             //print("player coordinates: " + playerCoordinates[0] + "," + playerCoordinates[1] + "\n");
              return playerCoordinates;
          } 
        }
@@ -122,8 +122,8 @@ class GreedyWumpus{
       //loop through each possible move and evaluate them
       for (int[] possibleMove: possibleMoves){
         tmpSound = calculateSound(possibleMove, playerLocation);
-        print("Tmp: " + tmpSound + " S: " + sound + "\n");
-        print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straigtLine dist: " + tmpSound + " current sound: " + sound + "\n");
+        //print("Tmp: " + tmpSound + " S: " + sound + "\n");
+        //print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straigtLine dist: " + tmpSound + " current sound: " + sound + "\n");
         if(tmpSound < sound){
           sound = tmpSound;
           bestMove = possibleMove; //current possible move is best so far 
@@ -171,7 +171,7 @@ class GreedyWumpus{
         xGUI =  bestMove[0]*75;
         xCoordinate = bestMove[0];
       }     
-          print("GreedyWumpus location: " + xCoordinate + "," + yCoordinate + "\n");
+          //print("GreedyWumpus location: " + xCoordinate + "," + yCoordinate + "\n");
     }
 }
   

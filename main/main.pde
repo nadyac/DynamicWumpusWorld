@@ -201,8 +201,17 @@ void mainScreen(){
   if(playerMove == false){
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
-        if(board.getTile(astarwumpus.getXCoordinate(), astarwumpus.getYCoordinate()).getPit()){
-          wumpusPit = true;
+        if(screens == 3 && board.getTile(astarwumpus.getXCoordinate(), astarwumpus.getYCoordinate()).getPit()){
+            wumpusPit = true;
+        }
+        if (screens == 2 && board.getTile(avoidingwumpus.getXCoordinate(), avoidingwumpus.getYCoordinate()).getPit()) {
+            wumpusPit = true;
+        }
+        if (screens == 1 && board.getTile(randomWumpus.getXCoordinate(), randomWumpus.getYCoordinate()).getPit()) {
+            wumpusPit = true;
+        }
+        if (screens == 7 && board.getTile(greedywumpus.getXCoordinate(), greedywumpus.getYCoordinate()).getPit()) {
+            wumpusPit = true;
         }
       }
     }
