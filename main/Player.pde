@@ -1,6 +1,11 @@
 /** 
  * Class Player
  * Representation of the human-controlled entity of the game
+ *
+ * Authors:         Kyle Davis, Kate Evans, Nadya Pena, Leanna Stecker
+ * Last Modified:   5/7/2015
+ * Arificial Intelligence
+ * Dr. Salgian
  */
 class Player{
   PImage player = loadImage("archer1.png");

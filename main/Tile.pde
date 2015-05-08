@@ -1,6 +1,11 @@
 /**
  * Class Tile
  * Representation of a tile on the game grid.
+ *
+ * Authors:         Kyle Davis, Kate Evans, Nadya Pena, Leanna Stecker
+ * Last Modified:   5/7/2015
+ * Arificial Intelligence
+ * Dr. Salgian
  */
 
 class Tile{

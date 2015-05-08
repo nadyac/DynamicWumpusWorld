@@ -1,3 +1,13 @@
+/**
+ * Class AvoidingWumpus
+ * Representation of a Wumpus (enemy of the player) that uses inference.
+ *
+ * Authors:         Kyle Davis, Kate Evans, Nadya Pena, Leanna Stecker
+ * Last Modified:   5/7/2015
+ * Arificial Intelligence
+ * Dr. Salgian
+ */
+
 import ddf.minim.spi.*;
 import ddf.minim.signals.*;
 import ddf.minim.*;
@@ -6,19 +16,18 @@ import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
 class AvoidingWumpus{
-  PImage wumpus = loadImage("wumpus.png");//image of the wumpus
+  PImage wumpus = loadImage("wumpus.png");
   
   Minim minim;
   AudioPlayer SFXpit;
   
-  // coordinates on the board
   int xCoordinate;
   int yCoordinate;
-  Knowledgebase kb;// knowledgebase
+  Knowledgebase kb;
   
-   //coordinates for the GUI
   int xGUI; 
   int yGUI;
+  int speed = 75;
    
    /*Constructor*/
    AvoidingWumpus(){
@@ -47,11 +56,11 @@ class AvoidingWumpus{
       int yCoord = int(y);
       return yCoord;
   }
-  /* returns the x-coordinate of the wumpus on the board */
+  
   int getXCoordinate(){
      return xCoordinate; 
   }
-  /* returns the x-coordinate of the wumpus on the board */
+  
   int getYCoordinate(){
     return yCoordinate;
   }
@@ -87,6 +96,11 @@ class AvoidingWumpus{
          int[] move3 = {xCoordinate,yCoordinate - 1}; //down
          possibleMoves.add(move3);
       } 
+       //print the possible moves (remove this later)
+       //print("possible wumpus moves: \n");
+       for(int[] moves: possibleMoves){
+         //print(moves[0]+ "," + moves[1] + "\n");
+       }
        return possibleMoves;
   }
   /**
@@ -99,6 +113,7 @@ class AvoidingWumpus{
        for(int j = 0; j < 8; j++){
          if (b.getTile(i,j).hasPlayer == true){
              int[] playerCoordinates = {i, j};
+             //print("player coordinates: " + playerCoordinates[0] + "," + playerCoordinates[1] + "\n");
              return playerCoordinates;
          } 
        }
@@ -134,6 +149,8 @@ class AvoidingWumpus{
         tmpSound = calculateSound(possibleMove, playerLocation);
         print("Tmp: " + tmpSound + " S: " + sound + "\n");
         print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straightLine dist: " + tmpSound + " current sound: " + sound + "\n");
+        //Tile tempTile2 = b.getTile(possibleMove[0], possibleMove[1]);  
+       // kb.addKnowledge(tempTile2);
         print("x1: " + possibleMove[0] + " y1: " + possibleMove[1] + "\n");
         if (kb.getTile(possibleMove[0], possibleMove[1]) != null) { 
           print("Safety of this tile is: " + kb.getTile(possibleMove[0], possibleMove[1]).getSafety());
@@ -145,6 +162,7 @@ class AvoidingWumpus{
         }
       } 
       
+     //print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
       if(board.getTile(xCoordinate, yCoordinate).getPit()){
           if(!SFXpit.isPlaying()) {
@@ -183,9 +201,9 @@ class AvoidingWumpus{
           xGUI =  bestMove[0]*75;
           xCoordinate = bestMove[0];
         }     
+        //print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
     }
     
-    /* returns the wumpus' knowledgebase*/
     public Knowledgebase getKB(){
        return kb; 
     }

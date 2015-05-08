@@ -1,8 +1,11 @@
 /**
-* Knowledgebase.pde - stores information about the game board as 8 x 8 Tile array
-*
-*
-**/
+ * Knowledgebase.pde - stores information about the game board as 8 x 8 Tile array
+ *
+ * Authors:         Kyle Davis, Kate Evans, Nadya Pena, Leanna Stecker
+ * Last Modified:   5/7/2015
+ * Arificial Intelligence
+ * Dr. Salgian
+ */
 class Knowledgebase{
   Tile[][] KB; 
   Board board;

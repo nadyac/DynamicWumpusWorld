@@ -1,6 +1,11 @@
 /** Class Board
   * Stores the state of the board - creates 10 pits in random Tiles upon instantiation. Sets breeze in Tiles adjacent to pits 
   * Puts gold in a random Tile and sets glitter in adjacent Tiles
+  *
+  * Authors:         Kyle Davis, Kate Evans, Nadya Pena, Leanna Stecker
+  * Last Modified:   5/7/2015
+  * Arificial Intelligence
+  * Dr. Salgian
   */
 class Board{
   

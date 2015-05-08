@@ -1,3 +1,13 @@
+/**
+ * Class AStarWumpus
+ * Representation of a Wumpus (enemy of the player) that seeks out the player using an AStar Search
+ *
+ * Authors:         Kyle Davis, Kate Evans, Nadya Pena, Leanna Stecker
+ * Last Modified:   5/7/2015
+ * Arificial Intelligence
+ * Dr. Salgian
+ */
+
 import ddf.minim.spi.*;
 import ddf.minim.signals.*;
 import ddf.minim.*;

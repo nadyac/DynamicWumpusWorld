@@ -1,3 +1,13 @@
+/**
+ * Class GreedyWumpus
+ * Representation of a Wumpus (enemy of the player) that seeks out the player using a Greedy Best-First Search
+ *
+ * Authors:         Kyle Davis, Kate Evans, Nadya Pena, Leanna Stecker
+ * Last Modified:   5/7/2015
+ * Arificial Intelligence
+ * Dr. Salgian
+ */
+
 class GreedyWumpus{
   PImage GreedyWumpus = loadImage("wumpus.png"); //image of the wumpus
   
