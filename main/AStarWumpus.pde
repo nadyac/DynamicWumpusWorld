@@ -121,6 +121,24 @@ class AStarWumpus{
    
    /*Call necessary functions to get wumpus to move*/
    void makeMove(Board b, AudioPlayer SFXpit){
+   /** unsets stench for previous tiles */
+   if (yCoordinate < 7) {
+      Tile wt1 = b.getTile(xCoordinate, yCoordinate+1);
+      wt1.setStench(false); 
+   }
+   if (yCoordinate > 0) {
+      Tile wt2 = board.getTile(xCoordinate, yCoordinate-1);
+      wt2.setStench(false);
+   }
+   if (xCoordinate < 7) {
+      Tile wt3 = board.getTile(xCoordinate+1, yCoordinate);
+      wt3.setStench(false);
+   }
+   if (xCoordinate > 0) {
+      Tile wt4 = board.getTile(xCoordinate-1, yCoordinate);
+      wt4.setStench(false);
+   }
+     
      
      Tile tempTile = b.getTile(xCoordinate, yCoordinate);
      kb.addKnowledge(tempTile);
@@ -180,7 +198,26 @@ class AStarWumpus{
           SFXpit.rewind();
           SFXpit.play();
         }
-      } 
+      }
+    
+       /** sets stench for next moves */
+       if (bestMove[1] < 7) {
+          Tile wt1 = b.getTile(bestMove[0], bestMove[1]+1);
+          wt1.setStench(true); 
+       }
+       if (bestMove[1] > 0) {
+          Tile wt2 = board.getTile(bestMove[0], bestMove[1]-1);
+          wt2.setStench(true);
+       }
+       if (bestMove[1] < 7) {
+          Tile wt3 = board.getTile(bestMove[0]+1, bestMove[1]);
+          wt3.setStench(true);
+       }
+       if (bestMove[1] > 0) {
+          Tile wt4 = board.getTile(bestMove[0]-1, bestMove[1]);
+          wt4.setStench(true);
+       }
+      
       
      }
   
