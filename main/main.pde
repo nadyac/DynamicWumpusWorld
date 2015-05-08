@@ -151,7 +151,7 @@ void mainScreen(){
          if(screens == 3) {
            tempTile = kbDemo2.getTile(x,y);
          }
-         if(screens == 4 || screens == 5 || screens == 6){
+         if(screens == 4 || screens == 5 || screens == 6 || screens == 8){
            tempTile = kbPlay.getTile(x,y);
          }
          /**Copies the knoweledge base in order to be correctly displayed. */
