@@ -139,28 +139,28 @@ class AStarWumpus{
       int[] playerLocation = getPlayerLocation(b);
       ArrayList<int[]> possibleMoves = getPossibleMoves();
       
-      print ("\n ****************************************************");
+      //print ("\n ****************************************************");
       //loop through each possible move and evaluate them
       for (int[] possibleMove: possibleMoves){
         tmpSound = calculateSound(possibleMove, playerLocation);
         
         currentETD = travelDistance + tmpSound;
         
-        print ("\n" + "Travel Distance: " + travelDistance + "\n");
-        print("current ETD of tile " + possibleMove[0] + "," + possibleMove[1] + " is: " + currentETD + "\n");
+        //print ("\n" + "Travel Distance: " + travelDistance + "\n");
+        //print("current ETD of tile " + possibleMove[0] + "," + possibleMove[1] + " is: " + currentETD + "\n");
         
         //if tile exists in kb, then get its safety value and its total estimated travel distance
         if (kb.getTile(possibleMove[0], possibleMove[1]) != null) { 
           
-          print ("***Tile already in KB***" + "\n");
+          //print ("***Tile already in KB***" + "\n");
 
-          print ("SAFETY being added to currentETD: " + kb.getTile(possibleMove[0], possibleMove[1]).getSafety() + "\n");
+          //print ("SAFETY being added to currentETD: " + kb.getTile(possibleMove[0], possibleMove[1]).getSafety() + "\n");
           currentETD = currentETD + kb.getTile(possibleMove[0], possibleMove[1]).getSafety();  //calculate estimated travel cost for the possible move with penalty
-          print("UPDATED current ETD of tile " + possibleMove[0] + "," + possibleMove[1] + " is: " + currentETD + "\n");
+          //print("UPDATED current ETD of tile " + possibleMove[0] + "," + possibleMove[1] + " is: " + currentETD + "\n");
           
         } if (b.getTile(xCoordinate, yCoordinate).getBreeze() == true){
           currentETD = currentETD + 1; //add penalty of 1 to each possible move because there is a pit nearby
-          print("Breeze in tile " + possibleMove[0] + "," + possibleMove[1] + " UPDATED current ETD is: " + currentETD + "\n");
+          //print("Breeze in tile " + possibleMove[0] + "," + possibleMove[1] + " UPDATED current ETD is: " + currentETD + "\n");
         }
         
         if(currentETD < bestETD){
@@ -169,9 +169,10 @@ class AStarWumpus{
           bestETD = currentETD;
         } 
       } 
-      
+     /* 
      print("\n" + "best move for A* Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
      print ("**************************************************** \n");
+     */
       move(bestMove);
       
       if(board.getTile(xCoordinate, yCoordinate).getPit()){

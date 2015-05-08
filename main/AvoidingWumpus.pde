@@ -87,9 +87,9 @@ class AvoidingWumpus{
          possibleMoves.add(move3);
       } 
        //print the possible moves (remove this later)
-       print("possible wumpus moves: \n");
+       //print("possible wumpus moves: \n");
        for(int[] moves: possibleMoves){
-         print(moves[0]+ "," + moves[1] + "\n");
+         //print(moves[0]+ "," + moves[1] + "\n");
        }
        return possibleMoves;
   }
@@ -103,7 +103,7 @@ class AvoidingWumpus{
        for(int j = 0; j < 8; j++){
          if (b.getTile(i,j).hasPlayer == true){
              int[] playerCoordinates = {i, j};
-             print("player coordinates: " + playerCoordinates[0] + "," + playerCoordinates[1] + "\n");
+             //print("player coordinates: " + playerCoordinates[0] + "," + playerCoordinates[1] + "\n");
              return playerCoordinates;
          } 
        }
@@ -152,7 +152,7 @@ class AvoidingWumpus{
         }
       } 
       
-     print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
+     //print("best move for avoiding Wumpus: " + bestMove[0] + "," + bestMove[1] + "\n");
       move(bestMove);
       if(board.getTile(xCoordinate, yCoordinate).getPit()){
         if(!SFXpit.isPlaying())
@@ -189,7 +189,7 @@ class AvoidingWumpus{
           xGUI =  bestMove[0]*75;
           xCoordinate = bestMove[0];
         }     
-        print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
+        //print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
     }
     
     public Knowledgebase getKB(){
