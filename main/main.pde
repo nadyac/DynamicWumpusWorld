@@ -445,7 +445,7 @@ void mouseClicked(){
    }
    if(mouseY > 300 && mouseY < 400){
      clear();
-     screens = 2;
+     screens = 7;
    }
    if(mouseY > 420 && mouseY < 520){
      clear();
@@ -453,7 +453,7 @@ void mouseClicked(){
    }
    if(mouseY > 540 && mouseY < 640){
      clear();
-     screens = 7;
+     screens = 2;
    }
  }
  if(mouseX > 815 && mouseX < 1115){
@@ -463,7 +463,7 @@ void mouseClicked(){
    }
    if(mouseY > 300 && mouseY < 400){
      clear();
-     screens = 5;
+     screens = 8;
    }
    if(mouseY > 420 && mouseY < 520){
      clear();
@@ -471,7 +471,7 @@ void mouseClicked(){
    }  
    if(mouseY > 540 && mouseY < 640){
      clear();
-     screens = 8;
+     screens = 5;
    }
  } 
   }
