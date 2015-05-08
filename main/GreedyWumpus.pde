@@ -1,13 +1,14 @@
 class GreedyWumpus{
-  PImage GreedyWumpus = loadImage("wumpus.png");
+  PImage GreedyWumpus = loadImage("wumpus.png"); //image of the wumpus
   
-  int xCoordinate;
+  // coordinates on the board
+  int xCoordinate; 
   int yCoordinate;
-  Knowledgebase kb;
+  Knowledgebase kb; // knowledgebase
   
+  //coordinates for the GUI
   int xGUI; 
   int yGUI;
-  int speed = 75;
    
    /*Constructor*/
    GreedyWumpus(){
@@ -37,10 +38,12 @@ class GreedyWumpus{
       return yCoord;
   }
   
+  /* returns the x-coordinate of the wumpus on the board */
   int getXCoordinate(){
      return xCoordinate; 
   }
   
+  /* returns the y-coordinate of the wumpus on the board */
   int getYCoordinate(){
     return yCoordinate;
   }
@@ -74,11 +77,6 @@ class GreedyWumpus{
          int[] move3 = {xCoordinate,yCoordinate - 1}; //down
          possibleMoves.add(move3);
       } 
-       //print the possible moves (remove this later)
-       //print("possible GreedyWumpus moves: \n");
-       for(int[] moves: possibleMoves){
-         //print(moves[0]+ "," + moves[1] + "\n");
-       }
        return possibleMoves;
   }
   /**
@@ -122,8 +120,6 @@ class GreedyWumpus{
       //loop through each possible move and evaluate them
       for (int[] possibleMove: possibleMoves){
         tmpSound = calculateSound(possibleMove, playerLocation);
-        //print("Tmp: " + tmpSound + " S: " + sound + "\n");
-        //print("current possible move: " + possibleMove[0] + "," + possibleMove[1] + " straigtLine dist: " + tmpSound + " current sound: " + sound + "\n");
         if(tmpSound < sound){
           sound = tmpSound;
           bestMove = possibleMove; //current possible move is best so far 
@@ -171,7 +167,6 @@ class GreedyWumpus{
         xGUI =  bestMove[0]*75;
         xCoordinate = bestMove[0];
       }     
-          //print("GreedyWumpus location: " + xCoordinate + "," + yCoordinate + "\n");
     }
 }
   
