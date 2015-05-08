@@ -117,9 +117,9 @@ void draw(){
  else if (screens == 10){
   deadScreen(); 
  }
-  else{
-    mainScreen();
-  }
+ else{
+  mainScreen();
+ }
 }
 
 void mainScreen(){
