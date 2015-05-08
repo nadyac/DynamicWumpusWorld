@@ -85,11 +85,6 @@ void setup(){
   board.setPits();
   /** Sets the gold on the board (one random tile) */
   board.setGold();
-  
-  //int x1 = avoidingwumpus.getXCoordinate();
-  //int y1 = avoidingwumpus.getYCoordinate();
-  //Tile wumpusTile = board.getTile(x1, y1);
-  //wumpusTile.setWumpus(true);
   smooth();
 }
 
