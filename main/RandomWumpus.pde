@@ -1,3 +1,8 @@
+/**
+ * Class RandomWumpus
+ * Representation of a Wumpus (enemy of the player) that chooses a random move of its possible four to actually take.
+ */
+
 import ddf.minim.spi.*;
 import ddf.minim.signals.*;
 import ddf.minim.*;
@@ -11,10 +16,14 @@ class RandomWumpus{
   Minim minim;
   AudioPlayer SFXpit;
   
+  /** x and y coordinate (0-7; in accordance to game grid) of the RandomWumpus */
   int xCoordinate;
   int yCoordinate;
+  
+  /** The RandomWumpus's knowledge of what it has seen so far of the board. */
   Knowledgebase kb;
   
+  /** x and y pixel location of the randomwumpus */
   int xGUI; 
   int yGUI;
   int speed = 75;
@@ -44,10 +53,12 @@ class RandomWumpus{
       return yCoord;
   }
   
+  /** return x coord of RandomWumpus */
   int getXCoordinate(){
      return xCoordinate; 
   }
   
+  /** return y coord of RandomWumpus */
   int getYCoordinate(){
     return yCoordinate;
   }
@@ -91,10 +102,10 @@ class RandomWumpus{
      
      int[] nextMove = null;
      
-     //get the list of possible moves
+     /** get the list of possible moves */
       ArrayList<int[]> possibleMoves = getPossibleMoves();
       
-     //randomly choose a move from the list of moves
+     /** randomly choose a move from the list of moves*/
       float randMove = random(0,2);
       int randomMove = int(randMove);
       //print("next Move for RandomWumpus: " + possibleMoves.get(randomMove) + "\n");
