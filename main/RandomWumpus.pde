@@ -81,14 +81,9 @@ class RandomWumpus{
          int[] move3 = {xCoordinate,yCoordinate - 1}; //down
          possibleMoves.add(move3);
       } 
-       //print the possible moves (remove this later)
-       /*
-       print("possible wumpus moves: \n");
-       for(int[] moves: possibleMoves){
-         print(moves[0]+ "," + moves[1] + "\n");
-       }
+       
        return possibleMoves;
-       */
+       
   }
    
    /*Choose a random move from the possible moves*/
