@@ -110,10 +110,10 @@ void draw(){
  if(screens == 0){
     openScreen();
   }
- else if (screens == 7){
+ else if (screens == 9){
   goldScreen(); 
  }
- else if (screens == 8){
+ else if (screens == 10){
   deadScreen(); 
  }
   else{
@@ -138,7 +138,7 @@ void mainScreen(){
            SFXgold.play();
            goldFound=true;
          }
-         if(screens == 1 || screens == 2 || screens == 3){
+         if(screens == 1 || screens == 2 || screens == 3 || screens == 7){
          tile.display(board);
         }
         
@@ -147,8 +147,12 @@ void mainScreen(){
            textSize(48);
            text("NO KNOWLEDGEBASE", 665, 300);
          }
+         if(screens == 7){
+           textSize(48);
+           text("NO KNOWLEDGEBASE", 665, 300);
+         }
          textSize(12);
-         if(screens == 2 || screens == 7 || screens == 8) {
+         if(screens == 2) {
            tempTile = kbDemo1.getTile(x,y);
          }
          if(screens == 3) {
@@ -189,6 +193,9 @@ void mainScreen(){
   if (screens == 3){
     astarwumpus.display();
   }
+  if (screens == 7){
+    greedywumpus.display();
+  }
   
   /*wumpus movement for it's turn*/
   if(playerMove == false){
@@ -221,6 +228,9 @@ void mainScreen(){
     if (screens == 3 || screens == 6){
       astarwumpus.makeMove(board, SFXpit);
     }
+    if (screens == 7 || screens == 8){
+      greedywumpus.makeMove(board, SFXpit);
+    }
       playerTurns = 0;
       wumpusPit = false;
       
@@ -229,13 +239,13 @@ void mainScreen(){
       print("YOU ESCAPED THE CAVE WITH THE GOLD!!!");
       //exit();
       clear();
-      screens = 7;
+      screens = 9;
     }
     if(board.getTile(player.getXCoordinate(), player.getYCoordinate()).getPit()){
       print("YOU DIED!!!");
       //exit();
       clear();
-      screens = 8;
+      screens = 10;
     }
     playerMove = true;
   }
@@ -263,23 +273,20 @@ void mainScreen(){
   */
   if(screens == 1 || screens == 4){
     if(randomWumpus.getXCoordinate()==player.getXCoordinate() && randomWumpus.getYCoordinate()==player.getYCoordinate()){
-    if(!SFXinception.isPlaying())
-      SFXinception.rewind();
-    SFXinception.play();
+    clear();
+      screens = 10;
   }
   }
   if(screens == 2 || screens == 5){
     if(avoidingwumpus.getXCoordinate()==player.getXCoordinate() && avoidingwumpus.getYCoordinate()==player.getYCoordinate()){
-    if(!SFXinception.isPlaying())
-      SFXinception.rewind();
-    SFXinception.play();
+    clear();
+      screens = 10;
   }
   }
   if(screens == 3 || screens == 6){
     if(astarwumpus.getXCoordinate()==player.getXCoordinate() && astarwumpus.getYCoordinate()==player.getYCoordinate()){
-    if(!SFXinception.isPlaying())
-      SFXinception.rewind();
-    SFXinception.play();
+      clear();
+      screens = 10;
   }
   }
   
@@ -308,6 +315,12 @@ void openScreen(){
   textSize(32);
   text("A* WUMPUS", 130, 480);
   
+  fill(255);
+  rect(75,540,300,100);
+  fill(0);
+  textSize(32);
+  text("AVOIDING WUMPUS", 76, 600);
+  
   textSize(50);
   fill(255);
   text("PLAY", 900, 160);
@@ -327,6 +340,12 @@ void openScreen(){
   fill(0);
   textSize(32);
   text("A* WUMPUS", 878, 480);
+  
+  fill(255);
+  rect(815,540,300,100);
+  fill(0);
+  textSize(32);
+  text("AVOIDING WUMPUS", 816, 600);
 }
 
 void deadScreen(){
@@ -348,6 +367,7 @@ void goldScreen(){
 /*move if the player pressed a key. this is when the board updates. */
 void keyPressed(){
   if(playerMove == true){
+    time = millis();
     /** Unsets the player's position from the old tile */
     board.getTile(player.getXCoordinate(), player.getYCoordinate()).setPlayer(false);
     /** Player makes their new move */
@@ -407,6 +427,10 @@ void mouseClicked(){
      clear();
      screens = 3;
    }
+   if(mouseY > 540 && mouseY < 640){
+     clear();
+     screens = 7;
+   }
  }
  if(mouseX > 815 && mouseX < 1115){
    if(mouseY > 180 && mouseY < 280){
@@ -421,5 +445,9 @@ void mouseClicked(){
      clear();
      screens = 6;
    }  
+   if(mouseY > 540 && mouseY < 640){
+     clear();
+     screens = 8;
+   }
  } 
 }
