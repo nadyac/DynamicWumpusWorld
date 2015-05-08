@@ -305,28 +305,28 @@ void openScreen(){
   text("DEMO", 150, 160);
   
   /** Sets up the graphics that represent a button on the screen */
-  rect(75,180,300,100);
+  rect(75,180,310,100);
   fill(0);
   textSize(32);
   text("RANDOM WUMPUS", 83, 245);
   
    /** Sets up the graphics that represent a button on the screen */
   fill(255);
-  rect(75,300,300,100);
+  rect(75,300,310,100);
   fill(0);
   textSize(32);
   text("GREEDY WUMPUS", 94, 360);
   
    /** Sets up the graphics that represent a button on the screen */
   fill(255);
-  rect(75,420,300,100);
+  rect(75,420,310,100);
   fill(0);
   textSize(32);
   text("A* WUMPUS", 130, 480);
   
    /** Sets up the graphics that represent a button on the screen */
   fill(255);
-  rect(75,540,300,100);
+  rect(75,540,310,100);
   fill(0);
   textSize(32);
   text("INFERENCE WUMPUS", 75, 600);
@@ -336,28 +336,28 @@ void openScreen(){
   text("PLAY", 900, 160);
   
    /** Sets up the graphics that represent a button on the screen */
-  rect(815,180,300,100);
+  rect(815,180,310,100);
   fill(0);
   textSize(32);
   text("RANDOM WUMPUS", 822, 245);
   
    /** Sets up the graphics that represent a button on the screen */
   fill(255);
-  rect(815,300,300,100);
+  rect(815,300,310,100);
   fill(0);
   textSize(32);
   text("GREEDY WUMPUS", 833, 360);
   
    /** Sets up the graphics that represent a button on the screen */
   fill(255);
-  rect(815,420,300,100);
+  rect(815,420,310,100);
   fill(0);
   textSize(32);
   text("A* WUMPUS", 878, 480);
   
    /** Sets up the graphics that represent a button on the screen */
   fill(255);
-  rect(815,540,300,100);
+  rect(815,540,310,100);
   fill(0);
   textSize(32);
   text("INFERENCE WUMPUS", 815, 600);
