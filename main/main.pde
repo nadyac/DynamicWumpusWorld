@@ -362,11 +362,6 @@ void deadScreen(){
   if(!SFXinception.isPlaying()){
       SFXinception.rewind();}
     SFXinception.play();
- 
-  rect(450,180,300,100);
-  fill(0);
-  textSize(32);
-  text("PLAY AGAIN", 500, 245);
   
 }
 
@@ -374,11 +369,6 @@ void goldScreen(){
   fill(255);
   textSize(40);
   text("YOU ESCAPED THE CAVE WITH THE GOLD!!!", 50, 100);
-  
-  rect(450,180,300,100);
-  fill(0);
-  textSize(32);
-  text("PLAY AGAIN", 500, 245);
 }
 
 /*move if the player pressed a key. this is when the board updates. */
@@ -469,10 +459,5 @@ void mouseClicked(){
    }
  } 
   }
-  else if(screens == 9 || screens == 10){
-    if(mouseX > 450 && mouseX < 750 && mouseY > 180 && mouseY < 280){
-      clear();
-      screens = 0;
-    }
-  }
+
 }
