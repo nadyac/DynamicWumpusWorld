@@ -18,3 +18,8 @@ Once you've installed Processing 2.2.1, run the program, <b>click</b> on the <b>
 - <b>GreedyWumpus:</b> Wumpus that uses sound (straight-line distance to player) as heuristic for determining best possible move
 - <b>AvoidingWumpus:</b> Also known as 'Inference Wumpus', looks at potential pits and combines that with 'sound' to make a decision on best possible move.
 - <b>A* Wumpus</b>: Smartest Wumpus that uses the 'sound' and distance traveled as well as potential pits and known pits to make decisions on best possible move.
+
+## How to play
+There are two modes to the game. They are <b>DEMO MODE</b> and <b>PLAYER MODE</b>. 
+- Demo mode makes the world fully observable by the Player, which means that you can see where the gold is, where the pits are located, as well as see the Wumpus as it moves through the world.  
+- The Player Mode makes the world partially observable and as the player, you will only see the tiles you've been to. You will not see the pits (but you will feel a breeze) and you will not see the Wumpus approaching (but you will smell the stench) and you may hear a falling noise whenever the Wumpus falls into a pit. Percepts will be stored in your "Knowledgebase" as you move through the cave.
