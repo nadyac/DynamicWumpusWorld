@@ -35,7 +35,7 @@ class Knowledgebase{
              if (xCoordinate != 0) {
                  //If this position already exists in our knowledge base, then we can do some inference on it (top-left diagonal)
                  if (KB[xCoordinate-1][yCoordinate-1] != null) {
-                     print("I've been to: " + Integer.toString(xCoordinate-1) + " " + Integer.toString(yCoordinate-1) + "\n");
+                     //print("I've been to: " + Integer.toString(xCoordinate-1) + " " + Integer.toString(yCoordinate-1) + "\n");
                      //If there is no breeze at the coordinate above the one we wish to go to (left and up), then we can assume there is no pit to our left - the safety level is set to 0 for "no pit"
                      if (KB[xCoordinate-1][yCoordinate-1].getBreeze() != true) {
                           this.addKnowledge(board.getTile(xCoordinate-1, yCoordinate));
@@ -47,7 +47,7 @@ class Knowledgebase{
                      else {
                        //tile to the left?
                        if (KB[xCoordinate-1][yCoordinate] != null) {
-                          print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
+                         //print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                          //we've fallen into a pit going to the left. This means we won't fall into this one again.
                          if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
                             KB[xCoordinate-1][yCoordinate].setSafety(1.4);
@@ -59,7 +59,7 @@ class Knowledgebase{
                        }
                        //tile above?
                        if(KB[xCoordinate][yCoordinate-1] != null){
-                          print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
+                          //print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                          //we've fallen into a pit going up. This means we won't fall into this again.
                          if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
                             KB[xCoordinate][yCoordinate-1].setSafety(1.4);
@@ -84,7 +84,7 @@ class Knowledgebase{
                  else { 
                    //If the diagonal tile is not in our knowledge base, then we can only check to see if the adjacent tiles are pits or not
                    if (KB[xCoordinate-1][yCoordinate] != null) {
-                      print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
+                      //print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                       // if it is a pit, then we add that to our knowledge base
                      if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
                         KB[xCoordinate-1][yCoordinate].setSafety(1.4);
@@ -96,7 +96,7 @@ class Knowledgebase{
                    }
                    // If the diagonal tile is not in our knowledge base, then we can only check to see if the adjacent tiles are pits or not 
                    if (KB[xCoordinate][yCoordinate-1] != null){
-                       print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
+                       //print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                        // If it is a pit, then we add that to our knowledge base 
                        if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
                           KB[xCoordinate][yCoordinate-1].setSafety(1.4);
@@ -106,17 +106,12 @@ class Knowledgebase{
                           KB[xCoordinate][yCoordinate-1].setSafety(0); 
                        }
                    }
-                   
-                   if (KB[xCoordinate][yCoordinate-1] == null && KB[xCoordinate-1][yCoordinate] == null) {
-                     print("shosh2"); 
-                   }
-                   
                  } 
              }
              // Everything here is pretty much the same as above, just different locations (will comment later when less lazy)
             if (xCoordinate != 7) {
                 if (KB[xCoordinate+1][yCoordinate-1] != null) {
-                   print("I've been to: " + Integer.toString(xCoordinate+1) + " " + Integer.toString(yCoordinate-1) + "\n");
+                   //print("I've been to: " + Integer.toString(xCoordinate+1) + " " + Integer.toString(yCoordinate-1) + "\n");
                      if (KB[xCoordinate+1][yCoordinate-1].getBreeze() != true) {
                        this.addKnowledge(board.getTile(xCoordinate+1, yCoordinate));
                        this.addKnowledge(board.getTile(xCoordinate, yCoordinate-1));
@@ -125,8 +120,7 @@ class Knowledgebase{
                      }
                      else {
                          if (KB[xCoordinate+1][yCoordinate] != null) {
-                             print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
-                             print("shouldn't know this either");
+                             //print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
                              if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
                                 KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                              }
@@ -135,7 +129,7 @@ class Knowledgebase{
                              }
                          }
                          if(KB[xCoordinate][yCoordinate-1] != null){
-                            print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
+                            //print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                              if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
                                 KB[xCoordinate][yCoordinate-1].setSafety(1.4);
                              }
@@ -156,7 +150,7 @@ class Knowledgebase{
                  
                  else { 
                       if (KB[xCoordinate+1][yCoordinate] != null) {
-                           print("I've been to: " + xCoordinate+1 + " " + yCoordinate + "\n");
+                           //print("I've been to: " + xCoordinate+1 + " " + yCoordinate + "\n");
                              if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
                                 KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                              }
@@ -165,7 +159,7 @@ class Knowledgebase{
                              }
                       }
                      if(KB[xCoordinate][yCoordinate-1] != null){
-                        print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
+                        //print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate-1) + "\n");
                          if (KB[xCoordinate][yCoordinate-1].getPit() == true) {
                             KB[xCoordinate][yCoordinate-1].setSafety(1.4);
                          }
@@ -187,7 +181,7 @@ class Knowledgebase{
           if (yCoordinate != 7) {
              if (xCoordinate > 0) {
                  if (KB[xCoordinate-1][yCoordinate+1] != null) {
-                      print("I've been to: " + Integer.toString(xCoordinate-1) + " " + Integer.toString(yCoordinate+1) + "\n");
+                     // print("I've been to: " + Integer.toString(xCoordinate-1) + " " + Integer.toString(yCoordinate+1) + "\n");
                      if (KB[xCoordinate-1][yCoordinate+1].getBreeze() != true) {
                        this.addKnowledge(board.getTile(xCoordinate-1, yCoordinate));
                        this.addKnowledge(board.getTile(xCoordinate, yCoordinate+1));
@@ -196,7 +190,7 @@ class Knowledgebase{
                      }
                      else {
                          if (KB[xCoordinate-1][yCoordinate] != null) {
-                            print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
+                           // print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                              if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
                                 KB[xCoordinate-1][yCoordinate].setSafety(1.4);
                              }
@@ -205,7 +199,7 @@ class Knowledgebase{
                              }
                          }
                          if(KB[xCoordinate][yCoordinate+1] != null){
-                              print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
+                              //print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                              if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
                                 KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                              }
@@ -225,7 +219,7 @@ class Knowledgebase{
                  }
                  else { 
                      if (KB[xCoordinate-1][yCoordinate] != null) {
-                          print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
+                          //print("I've been to: " + Integer.toString(xCoordinate-1) + " " + yCoordinate + "\n");
                          if (KB[xCoordinate-1][yCoordinate].getPit() == true) {
                             KB[xCoordinate-1][yCoordinate].setSafety(1.4);
                          }
@@ -234,7 +228,7 @@ class Knowledgebase{
                          }
                      }
                      if (KB[xCoordinate][yCoordinate+1] != null){
-                          print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
+                          //print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                          if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
                             KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                          }
@@ -248,7 +242,7 @@ class Knowledgebase{
              }
             if (xCoordinate != 7) {
                 if (KB[xCoordinate+1][yCoordinate+1] != null) {
-                   print("I've been to: " + Integer.toString(xCoordinate+1) + " " + Integer.toString(yCoordinate+1) + "\n");
+                  // print("I've been to: " + Integer.toString(xCoordinate+1) + " " + Integer.toString(yCoordinate+1) + "\n");
                      if (KB[xCoordinate+1][yCoordinate+1].getBreeze() != true) {
                          this.addKnowledge(board.getTile(xCoordinate+1, yCoordinate));
                          this.addKnowledge(board.getTile(xCoordinate, yCoordinate+1));
@@ -257,7 +251,7 @@ class Knowledgebase{
                      }
                      else {
                        if (KB[xCoordinate+1][yCoordinate] != null) {
-                            print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
+                            //print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
                            if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
                               KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                            }
@@ -266,7 +260,7 @@ class Knowledgebase{
                            }
                        }
                        if (KB[xCoordinate][yCoordinate+1] != null){
-                            print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
+                           // print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                            if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
                               KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                            }
@@ -287,7 +281,7 @@ class Knowledgebase{
                  else { 
                    //If the tile does not exist in our knowledge base, then we will assume it could potentially have a pit - the safety level is set to one for "possible pit"
                   if (KB[xCoordinate+1][yCoordinate] != null) {
-                       print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
+                       //print("I've been to: " + Integer.toString(xCoordinate+1) + " " + yCoordinate + "\n");
                            if (KB[xCoordinate+1][yCoordinate].getPit() == true) {
                               KB[xCoordinate+1][yCoordinate].setSafety(1.4);
                            }
@@ -296,7 +290,7 @@ class Knowledgebase{
                            }
                        }
                        if (KB[xCoordinate][yCoordinate+1] != null){
-                            print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
+                            //print("I've been to: " + xCoordinate + " " + Integer.toString(yCoordinate+1) + "\n");
                            if (KB[xCoordinate][yCoordinate+1].getPit() == true) {
                               KB[xCoordinate][yCoordinate+1].setSafety(1.4);
                            }
