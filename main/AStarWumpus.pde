@@ -219,11 +219,11 @@ class AStarWumpus{
           Tile wt2 = board.getTile(bestMove[0], bestMove[1]-1);
           wt2.setStench(true);
        }
-       if (bestMove[1] < 7) {
+       if (bestMove[0] < 7) {
           Tile wt3 = board.getTile(bestMove[0]+1, bestMove[1]);
           wt3.setStench(true);
        }
-       if (bestMove[1] > 0) {
+       if (bestMove[0] > 0) {
           Tile wt4 = board.getTile(bestMove[0]-1, bestMove[1]);
           wt4.setStench(true);
        }

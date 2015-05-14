@@ -23,6 +23,7 @@ class AvoidingWumpus{
   
   int xCoordinate;
   int yCoordinate;
+  int totalMoves;
   Knowledgebase kb;
   
   int xGUI; 
@@ -37,7 +38,8 @@ class AvoidingWumpus{
      
     /*Set the wumpus's coordinates in pixels*/
      xGUI = xCoordinate*75;
-     yGUI = yCoordinate*75; 
+     yGUI = yCoordinate*75;
+     totalMoves = 0; 
      
      /*Create empty knowledgebase*/
      kb = new Knowledgebase();
@@ -201,7 +203,7 @@ class AvoidingWumpus{
           xGUI =  bestMove[0]*75;
           xCoordinate = bestMove[0];
         }     
-        //print("avoiding wumpus location: " + xCoordinate + "," + yCoordinate + "\n"); 
+        totalMoves++; 
     }
     
     public Knowledgebase getKB(){

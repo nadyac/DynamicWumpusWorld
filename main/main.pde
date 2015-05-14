@@ -278,6 +278,7 @@ void mainScreen(){
       deathOutput = "The wumpus found you";
       clear();
       screens = 10;
+      print("Total moves made by Wumpus: " + randomWumpus.totalMoves);
     }
   }
   if(screens == 2 || screens == 5){
@@ -285,6 +286,7 @@ void mainScreen(){
        deathOutput = "The wumpus found you";
       clear();
       screens = 10;
+      print("Total moves made by Wumpus: " + avoidingwumpus.totalMoves);
     }
   }
   if(screens == 3 || screens == 6){
@@ -292,6 +294,7 @@ void mainScreen(){
       deathOutput = "The wumpus found you";
       clear();
       screens = 10;
+      print("Total moves made by Wumpus: " + astarwumpus.travelDistance);
     }
   }
   if(screens == 7 || screens == 8){
@@ -299,6 +302,7 @@ void mainScreen(){
        deathOutput = "The wumpus found you";
       clear();
       screens = 10;
+      print("Total moves made by Wumpus: " + greedywumpus.totalMoves);
     }
   }
   
