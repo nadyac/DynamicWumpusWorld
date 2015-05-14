@@ -14,6 +14,7 @@ class GreedyWumpus{
   // coordinates on the board
   int xCoordinate; 
   int yCoordinate;
+  int totalMoves;
   Knowledgebase kb; // knowledgebase
   
   //coordinates for the GUI
@@ -29,6 +30,7 @@ class GreedyWumpus{
     /*Set the GreedyWumpus's coordinates in pixels*/
      xGUI = xCoordinate*75;
      yGUI = yCoordinate*75; 
+     totalMoves = 0;
      
      /*Create empty knowledgebase*/
      Knowledgebase kb = new Knowledgebase();
@@ -176,7 +178,8 @@ class GreedyWumpus{
       if (xGUI!=0 && xCoordinate!=0) {
         xGUI =  bestMove[0]*75;
         xCoordinate = bestMove[0];
-      }     
+      }  
+     totalMoves++;   
     }
 }
   

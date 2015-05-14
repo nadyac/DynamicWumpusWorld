@@ -24,6 +24,7 @@ class RandomWumpus{
   /** x and y coordinate (0-7; in accordance to game grid) of the RandomWumpus */
   int xCoordinate;
   int yCoordinate;
+  int totalMoves;
   
   /** The RandomWumpus's knowledge of what it has seen so far of the board. */
   Knowledgebase kb;
@@ -38,6 +39,7 @@ class RandomWumpus{
      /*Calculate starting coordinates*/
      xCoordinate = startX();
      yCoordinate = startY(); 
+     totalMoves = 0;
      
     /*Set the wumpus's coordinates in pixels*/
      xGUI = xCoordinate*75;
@@ -154,7 +156,7 @@ class RandomWumpus{
         xGUI =  bestMove[0]*75;
         xCoordinate = bestMove[0];
       }     
-          //print("wumpus location: " + xCoordinate + "," + yCoordinate + "\n");
+         totalMoves++;
     }
 }
   
