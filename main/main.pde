@@ -111,11 +111,15 @@ void draw(){
 * mainScreen - function that runs the game. Is called continuously by draw when in demo or play mode.
 */
 int counter = 0;
-int startTime;
+int startTimeS;
+int startTimeM;
+int startTimeH;
 
 void mainScreen(){
   if(counter == 0){
-    startTime = second();
+    startTimeS = second();
+    startTimeM = minute();
+    startTimeH = hour();
   }
   counter++;
   /**Drawing the playing board */ 
@@ -393,9 +397,11 @@ void deadScreen(){
       SFXinception.rewind();}
     SFXinception.play();
   if(timerCount == 0){
-    int playTime = second();
-    print ("\nSTART TIME: " + startTime + "\n");
-    print ("END TIME: " + playTime);
+    int playTimeS = second();
+    int playTimeM = minute();
+    int playTimeH = hour();
+    print ("\nSTART TIME: " + startTimeH + ":" + startTimeM + ":" + startTimeS + "\n");
+    print ("END TIME: " + playTimeH + ":" + playTimeM + ":" + playTimeS + "\n");
   }
   timerCount++;
 }
@@ -408,9 +414,11 @@ void goldScreen(){
   textSize(40);
   text("YOU ESCAPED THE CAVE WITH THE GOLD!!!", 50, 100);
   if(timerCount == 0){
-    int playTime = second();
-    print ("\nSTART TIME: " + startTime + "\n");
-    print ("END TIME: " + playTime);
+    int playTimeS = second();
+    int playTimeM = minute();
+    int playTimeH = hour();
+    print ("\nSTART TIME: " + startTimeH + ":" + startTimeM + ":" + startTimeS + "\n");
+    print ("END TIME: " + playTimeH + ":" + playTimeM + ":" + playTimeS + "\n");
   }
   timerCount++;
 }
