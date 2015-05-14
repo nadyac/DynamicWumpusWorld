@@ -192,6 +192,13 @@ void mainScreen(){
   /**Displaying the player */ 
   player.display();
   
+   if (player.getXCoordinate() == 0 && player.getYCoordinate() == 7 && board.getTile(0, 7).getBreeze() == true) {
+        kbPlay.addKnowledge(board.getTile(0,7));
+        print("There is a breeze..." + "\n\n\n");  
+        fill(255);
+        text("There is a breeze...", 100, 650);
+  }
+  
   /**Displaying the different wumpuses based on the users selection */ 
   if(screens == 1){
     randomWumpus.display();
